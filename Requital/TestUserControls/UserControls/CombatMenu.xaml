@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="TestUserControls.UserControls.CombatMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestUserControls.UserControls"
+             mc:Ignorable="d" 
+             >
+    <Grid x:Name="Options" Width="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="OptionsPanel" Grid.Row="0" Background="Blue" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Button.Width" Value="100"/>
+                    <Setter Property="Button.FontSize" Value="24"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button x:Name="Attack" Content="Attack" Click="Attack_Click"/>
+            <Button x:Name="Magic" Content="Magic" Click="Magic_Click"
+                FontStyle="Italic"/>
+            <Button x:Name="Defend" Content="Defend" Click="Defend_Click"
+                FontWeight="Heavy"/>
+            <Button x:Name="Flee" Content="Flee" Click="Flee_Click"
+                FontStyle="Oblique"/>
+        </StackPanel>
+        <Label x:Name="ViewOptions" Visibility="Hidden" Margin="0" Grid.Row="1"
+               HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button x:Name="BackButton" Click="Close_Click"/>
+        </Label>
+    </Grid>
+</UserControl>

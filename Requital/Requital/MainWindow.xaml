@@ -1,0 +1,15 @@
+﻿<Window x:Class="Requital.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ms="clr-namespace:Requital.Windows"
+        xmlns:local="clr-namespace:Requital"
+        mc:Ignorable="d"
+        Title="Requital"
+        WindowStartupLocation="CenterScreen" Width="1250" Height="650"
+        x:Name="mainWindow">
+    <Grid>
+        <ms:MovementScreen x:Name="MovementScreen"/>
+    </Grid>
+</Window>

@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Requital.UserControls.CharacterStats"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Requital.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="MainPanel">
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+        <DockPanel Margin="0,5,0,0" Grid.Column="0" Grid.Row="0">
+            <Label Content="Name"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=Name, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="1" Grid.Row="0">
+            <Label Content="Lvl"
+                   Width="23" Height="25"/>
+            <Label Content="{Binding Path=Level, Mode=OneWay}"
+                   Width="23"/>
+            <Label Content="Experience"
+                   Width="70" Height="25"/>
+            <Label Content="{Binding Path=Experience, Mode=OneWay}"
+                   Width="85" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="0" Grid.Row="1">
+            <Label Content="Class"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=CharacterClass, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="1" Grid.Row="1">
+            <Label Content="Health"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=Health, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="0" Grid.Row="2">
+            <Label Content="Mana"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=Mana, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="1" Grid.Row="2">
+            <Label Content="Magic Defense"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=MagicDefense, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="0" Grid.Row="3">
+            <Label Content="Physical Defense"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=PhysicalDefense, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="1" Grid.Row="3">
+            <Label Content="Attack"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=AttackPower, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="0" Grid.Row="4">
+            <Label Content="Spell Power"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=SpellPower, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+        <DockPanel Margin="0,5,0,0" Grid.Column="1" Grid.Row="4">
+            <Label Content="Speed"
+                   Width="100" Height="25"/>
+            <Label Content="{Binding Path=Speed, Mode=OneWay}"
+                   Width="100" Height="30" Background="CadetBlue"
+                   HorizontalAlignment="Left"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
