@@ -5,14 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestUserControls.UserControls"
              mc:Ignorable="d" 
+             xmlns:vc="clr-namespace:Requital.ValueConverters;assembly=Requital"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="MainGrid">
+        <Grid.Resources>
+            <vc:ClassToImagesConverter x:Key="C2I"/>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        
         <!--Choose Column-->
         <StackPanel Grid.Column="0" Background="CadetBlue">
             <!--ComboBox-->
@@ -34,10 +38,11 @@
             <!--Create Hero Button-->
             <Button Content="Create Hero" FontSize="20" Click="Create_Click"/>
             <!--Preview Hero Button-->
-            <Button Margin="0.5 150 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass}"
+            <!--<Button Margin="0.5 150 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"
                     FontWeight="Heavy" FontSize="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     Background="CadetBlue" BorderThickness="0" Click="ShowStats_Click"
-                    x:Name="ShowStatsButton"/>
+                    x:Name="ShowStatsButton"/>-->
+            <Image Margin="0.5 150 0.5 0" Height="150" Width="150" Source="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"/>
         </StackPanel>
         
         <!--Stats Column-->
