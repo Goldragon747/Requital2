@@ -17,63 +17,83 @@ using System.Collections.ObjectModel;
 
 namespace TestUserControls.UserControls
 {
-    public class Person
-    {
-        public Person(int health)
-        {
-            Health = health;
-        }
-
-        public int Health { get; set; }
-    }
     public partial class CreationScreen : UserControl
     {
-        public CreationScreen()
-        {
-            InitializeComponent();
-            //int[] nums = Enumerable.Range(24, 100).ToArray();
             ObservableCollection<Characters> charList = new ObservableCollection<Characters>()
             {
                 new Warrior(), new Rogue(), new Mage(), new Cleric(),
             };
+        public CreationScreen()
+        {
+            InitializeComponent();
             ItemsComboBox.ItemsSource = charList;
-
-            //Person per = new Person(0);
-            StatsPanel.DataContext = ItemsComboBox.Items.CurrentItem;
         }
         int createCounter = 0;
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            Binding bind = new Binding();
-            if (createCounter < 4)
+            if(NameLabel.Content != null)
             {
-                Person p = new Person((int)NameLabel.Content);
-                Button b = new Button();
-                b.Background = Brushes.Moccasin;
-                b.Width = 100;
-                b.Height = 100;
-                b.Content = $"Class: {NameLabel.Content} \nName: {Username.Text}";
+                if (createCounter < 4)
+                {
+                    Characters p = new Characters();
+                    p.CharacterClass = NameLabel.Content.ToString();
+                    Label b = new Label();
+                    b.Background = Brushes.Moccasin;
+                    b.Width = 100;
+                    b.Height = 100;
+                    b.Content = $"Name: {Username.Text} \nClass: {NameLabel.Content}";
+                    b.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    b.VerticalContentAlignment = VerticalAlignment.Center;
+                    b.DataContext = p;
+                    b.MouseLeftButtonDown += B_Click;
+                    b.MouseRightButtonDown += DeleteHero_Click;
 
-                b.DataContext = p;
-                b.Click += B_Click;
-
-                TeamGrid.Children.Add(b);
+                    TeamGrid.Children.Add(b);
+                    createCounter++;
+                }
             }
-            createCounter++;
+            
+
+            if (createCounter == 4)
+                ReadyButton.Visibility = Visibility.Visible;
         }
 
         private void B_Click(object sender, RoutedEventArgs e)
         {
-            Button b = ((Button)sender);
-            Person p = (Person)b.DataContext;
-
-            //StatsPanel.DataContext = p;
+            Label b = ((Label)sender);
+            Characters p = (Characters)b.DataContext;
+            
+            for (int i = 0; i < charList.Count; i++)
+            {
+                if (charList.ElementAt(i).CharacterClass == p.CharacterClass)
+                    StatsPanel.DataContext = charList.ElementAt(i);
+            }
         }
 
-        private void ItemsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //private void ShowStats_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Characters p = new Characters();
+        //    p.CharacterClass = ShowStatsButton.Content.ToString();
+
+        //    for (int i = 0; i < charList.Count; i++)
+        //    {
+        //        if (charList.ElementAt(i).CharacterClass == p.CharacterClass)
+        //            StatsPanel.DataContext = charList.ElementAt(i);
+        //    }
+        //}
+        private void Complete_Click(object sender, RoutedEventArgs e)
         {
-
-            StatsPanel.DataContext = ((ComboBox)sender).Items.CurrentItem;
+            MessageBox.Show($"Team is ready to slay");
         }
+
+        private void DeleteHero_Click(object sender, RoutedEventArgs e)
+        {
+            createCounter--;
+            Label l = (Label)sender;
+            TeamGrid.Children.Remove(l);
+            ReadyButton.Visibility = Visibility.Hidden;
+
+        }
+
     }
 }

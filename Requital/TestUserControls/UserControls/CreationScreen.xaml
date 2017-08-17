@@ -5,20 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestUserControls.UserControls"
              mc:Ignorable="d" 
+             xmlns:vc="clr-namespace:Requital.ValueConverters;assembly=Requital"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="MainGrid">
+        <Grid.Resources>
+            <vc:ClassToImagesConverter x:Key="C2I"/>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        
         <!--Choose Column-->
         <StackPanel Grid.Column="0" Background="CadetBlue">
+            <!--ComboBox-->
             <DockPanel Margin="110,5,110,20">
-                <Button DockPanel.Dock="Left" Width="50" Height="30" Content="Prev"/>
-                <Button DockPanel.Dock="Right" Width="50" Height="30" Content="Next"/>
-                <ComboBox x:Name="ItemsComboBox" Background="AliceBlue" Height="30" SelectionChanged="ItemsComboBox_SelectionChanged">
+                <ComboBox x:Name="ItemsComboBox" Background="AliceBlue" Height="30" IsEnabled="True">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label FontWeight="DemiBold" Content="{Binding CharacterClass}"/>
@@ -26,12 +29,20 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </DockPanel>
-            <DockPanel>
-                <TextBox x:Name="Username" DockPanel.Dock="Left" Background="Moccasin"
-                         Width="110" Text="MAX 10" MaxLines="1" MaxLength="10"/>
-                <Label Content="Name"/>
+            <!--Username-->
+            <DockPanel Margin="0 25 290 50">
+                <Label Content="Hero Name" DockPanel.Dock="Top" FontSize="18"/>
+                <TextBox x:Name="Username" Background="Moccasin" HorizontalAlignment="Left"
+                         Width="110" FontSize="16" Text="MAX 10" MaxLines="1" MaxLength="10"/>
             </DockPanel>
-            <Button Content="Create Character" Click="Create_Click"/>
+            <!--Create Hero Button-->
+            <Button Content="Create Hero" FontSize="20" Click="Create_Click"/>
+            <!--Preview Hero Button-->
+            <!--<Button Margin="0.5 150 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"
+                    FontWeight="Heavy" FontSize="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Background="CadetBlue" BorderThickness="0" Click="ShowStats_Click"
+                    x:Name="ShowStatsButton"/>-->
+            <Image Margin="0.5 150 0.5 0" Height="150" Width="150" Source="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"/>
         </StackPanel>
         
         <!--Stats Column-->
@@ -58,7 +69,7 @@
             </DockPanel>
             <DockPanel>
                 <Label Content="Attack" Style="{StaticResource LabelName}"/>
-                <Label Content="{Binding Attack}" Style="{StaticResource LabelOutput}"/>
+                <Label Content="{Binding AttackPower}" Style="{StaticResource LabelOutput}"/>
             </DockPanel>
             <DockPanel>
                 <Label Content="Physical Defense" Style="{StaticResource LabelName}"/>
@@ -76,12 +87,15 @@
                 <Label Content="Speed" Style="{StaticResource LabelName}"/>
                 <Label Content="{Binding Speed}" Style="{StaticResource LabelOutput}"/>
             </DockPanel>
+            <Button x:Name="ReadyButton" Width="100" Height="75" Click="Complete_Click"
+                    Content="Complete" Visibility="Hidden" Background="Aquamarine" FontStyle="Oblique"/>
         </StackPanel>
         
         <!--Team Column-->
-        <UniformGrid x:Name="TeamGrid" Background="CadetBlue" Grid.Column="2">
-            
-        <Label x:Name="NameLabel" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem}"/>
-        </UniformGrid>
+        <UniformGrid x:Name="TeamGrid" Background="CadetBlue" Grid.Column="2"/>
+        
+        <!--Hidden Cheap Way Around Getting ComboBox.Items.CurrentItem-->
+        <Label x:Name="NameLabel" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass}" 
+               Background="Moccasin" Width="100" Height="100" Visibility="Hidden"/>
     </Grid>
 </UserControl>
