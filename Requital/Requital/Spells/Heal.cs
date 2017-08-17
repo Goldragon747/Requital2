@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Requital.Spells
 {
-    class Heal: Spells
+    public class Heal: Spells
     {
         public void healSpell()
         {
@@ -14,6 +14,7 @@ namespace Requital.Spells
             base.Healing = 5;
             base.ManaCost = 5;
             base.Name = "Heal";
+            base.description = "Fills your target with vitality, healing their wounds.";
         }
     }
 }
