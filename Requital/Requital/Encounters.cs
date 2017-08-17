@@ -36,11 +36,11 @@ namespace Requital
             }
             else if (ranEncounter >= 51 && ranEncounter < 61)
             {
-                //encounter6();
+                caveEncounter3();
             }
             else if (ranEncounter >= 61 && ranEncounter < 71)
             {
-                //encounter7();
+                wimpyEncounter();
             }
             else if (ranEncounter >= 71 && ranEncounter < 81)
             {
@@ -131,19 +131,46 @@ namespace Requital
             return forestEncounter3;
         }
 
-        private void encounter5()
+        private List<Characters> caveEncounter3()
         {
-            throw new NotImplementedException();
+            List<Characters> caveEncounter3 = new List<Characters>();
+            Knight k = new Knight();
+            Knight k2 = new Knight();
+            caveEncounter3.Add(k);
+            caveEncounter3.Add(k2);
+            return caveEncounter3;
         }
 
-        private void encounter4()
+        private List<Characters> wimpyEncounter()
         {
-            throw new NotImplementedException();
+            List<Characters> wimpyEncounter = new List<Characters>();
+            Goblin g = new Goblin();
+            wimpyEncounter.Add(g);
+            return wimpyEncounter;
         }
 
-        private void encounter3()
+        private List<Characters> powerOverwhelming()
         {
-            throw new NotImplementedException();
+            List<Characters> powerOverwhelming = new List<Characters>();
+            Knight k = new Knight();
+            Knight k2 = new Knight();
+            Knight k3 = new Knight();
+            Knight k4 = new Knight();
+            Knight k5 = new Knight();
+            Knight k6 = new Knight();
+            Knight k7 = new Knight();
+            Knight k8 = new Knight();
+            Knight k9 = new Knight();
+            powerOverwhelming.Add(k);
+            powerOverwhelming.Add(k2);
+            powerOverwhelming.Add(k3);
+            powerOverwhelming.Add(k4);
+            powerOverwhelming.Add(k5);
+            powerOverwhelming.Add(k6);
+            powerOverwhelming.Add(k7);
+            powerOverwhelming.Add(k8);
+            powerOverwhelming.Add(k9);
+            return powerOverwhelming;
         }
 
         private void encounter9()
@@ -155,13 +182,19 @@ namespace Requital
         {
             throw new NotImplementedException();
         }
-        public void initialTianEncounter()
+        public List<Characters> initialTianEncounter()
         {
             Tian tian = new Tian();
+            List<Characters> initialTianEncounter = new List<Characters>();
+            initialTianEncounter.Add(tian);
+            return initialTianEncounter;
         }
-        public void endTianEncounter()
+        public List<Characters> endTianEncounter()
         {
-
+            Tian tian = new Tian();
+            List<Characters> endTianEncounter = new List<Characters>();
+            endTianEncounter.Add(tian);
+            return endTianEncounter;
         }
     }
 }

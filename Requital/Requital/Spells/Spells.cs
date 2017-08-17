@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Requital.Spells
 {
-    class Spells
+    public class Spells
     {
         private string name;
         private int manaCost;
         private int damage;
         private int healing;
+        public string description { get; set; }
 
         public int Healing
         {

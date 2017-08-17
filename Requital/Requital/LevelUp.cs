@@ -14,9 +14,10 @@ namespace Requital
         {
             if(Leveler.CharacterClass == "Mage")
             {
-                level(Leveler, 5, 1, 3, 2, 0, 1, 3);
-                Leveler.Experience = 0;
+                level(Leveler, 5, 1, 3, 2, 0, 1, 3);             
                 Leveler.Level += 1;
+                int expDrop = Leveler.Level * 100;
+                Leveler.Experience = Leveler.Experience - expDrop;
             }
             else if(Leveler.CharacterClass == "Cleric")
             {

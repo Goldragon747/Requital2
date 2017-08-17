@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Requital.Spells
 {
-    class FireBall : Spells
+    public class FireBall : Spells
     {
         public void FireBallSpell()
         {
@@ -14,6 +14,7 @@ namespace Requital.Spells
             base.Healing = 0;
             base.ManaCost = 10;
             base.Name = "FireBall";
+            base.description = "Hurls a flaming ball of magical fire at your opponent.";
 
         }
     }
