@@ -173,9 +173,18 @@ namespace Requital
             return powerOverwhelming;
         }
 
-        private void encounter9()
+        private List<Characters> Mirror()
         {
-            throw new NotImplementedException();
+            List<Characters> mirror = new List<Characters>();
+            Rogue r = new Rogue();
+            Warrior w = new Warrior();
+            Cleric c = new Cleric();
+            Mage m = new Mage();
+            mirror.Add(r);
+            mirror.Add(w);
+            mirror.Add(c);
+            mirror.Add(m);
+            return mirror;
         }
 
         private void encounter10()
@@ -192,8 +201,24 @@ namespace Requital
         public List<Characters> endTianEncounter()
         {
             Tian tian = new Tian();
+            Goblin g = new Goblin();
+            GoblinRogue gr = new GoblinRogue();
+            ElfCleric ec = new ElfCleric();
+            ElfMage em = new ElfMage();
+            ElfRogue er = new ElfRogue();
+            ElfWarrior ew = new ElfWarrior();
+            Knight k = new Knight();
+            Skeleton s = new Skeleton();
             List<Characters> endTianEncounter = new List<Characters>();
             endTianEncounter.Add(tian);
+            endTianEncounter.Add(g);
+            endTianEncounter.Add(gr);
+            endTianEncounter.Add(ec);
+            endTianEncounter.Add(em);
+            endTianEncounter.Add(er);
+            endTianEncounter.Add(ew);
+            endTianEncounter.Add(k);
+            endTianEncounter.Add(s);
             return endTianEncounter;
         }
     }
