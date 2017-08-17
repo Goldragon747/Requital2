@@ -175,5 +175,14 @@
   <ItemGroup>
     <Resource Include="assets\Maps\FinalCave.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Warrior.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Mage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Cleric.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

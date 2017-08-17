@@ -33,16 +33,16 @@
             <DockPanel Margin="0 25 290 50">
                 <Label Content="Hero Name" DockPanel.Dock="Top" FontSize="18"/>
                 <TextBox x:Name="Username" Background="Moccasin" HorizontalAlignment="Left"
-                         Width="110" FontSize="16" Text="MAX 10" MaxLines="1" MaxLength="10"/>
+                         Width="110" FontSize="16" MaxLines="1" MaxLength="10"/>
             </DockPanel>
             <!--Create Hero Button-->
             <Button Content="Create Hero" FontSize="20" Click="Create_Click"/>
             <!--Preview Hero Button-->
-            <!--<Button Margin="0.5 150 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"
-                    FontWeight="Heavy" FontSize="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                    Background="CadetBlue" BorderThickness="0" Click="ShowStats_Click"
-                    x:Name="ShowStatsButton"/>-->
-            <Image Margin="0.5 150 0.5 0" Height="150" Width="150" Source="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"/>
+            <Grid>
+                <Image Margin="0.5 150 0.5 0" Height="150" Source="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"/>
+                <Button Margin="0.5 150 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass}"
+                        Opacity="0" Click="ShowStats_Click" x:Name="ShowStatsButton"/>
+            </Grid>
         </StackPanel>
         
         <!--Stats Column-->

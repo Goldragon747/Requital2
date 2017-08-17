@@ -16,9 +16,15 @@ namespace Requital.ValueConverters
             string c = (string)value;
 
             if (c == "Rogue")
-                return new BitmapImage(new Uri("Requital/Requital/assets/Rogue.png", UriKind.Relative));
+                return new Uri(@"pack://application:,,,/Requital;component/assets/Rogue.png", UriKind.RelativeOrAbsolute);
+            if (c == "Warrior")
+                return new Uri("pack://application:,,,/Requital;component/assets/Warrior.png", UriKind.RelativeOrAbsolute);
+            if (c == "Mage")
+                return new Uri("pack://application:,,,/Requital;component/assets/Mage.png", UriKind.RelativeOrAbsolute);
+            if (c == "Cleric")
+                return new Uri("pack://application:,,,/Requital;component/assets/Cleric.png", UriKind.RelativeOrAbsolute);
 
-            return "nope";
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

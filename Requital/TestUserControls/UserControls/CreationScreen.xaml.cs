@@ -41,7 +41,7 @@ namespace TestUserControls.UserControls
                     b.Background = Brushes.Moccasin;
                     b.Width = 100;
                     b.Height = 100;
-                    b.Content = $"Name: {Username.Text} \nClass: {NameLabel.Content}";
+                    b.Content = $"{Username.Text} \nClass: {NameLabel.Content}";
                     b.HorizontalContentAlignment = HorizontalAlignment.Center;
                     b.VerticalContentAlignment = VerticalAlignment.Center;
                     b.DataContext = p;
@@ -70,17 +70,17 @@ namespace TestUserControls.UserControls
             }
         }
 
-        //private void ShowStats_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Characters p = new Characters();
-        //    p.CharacterClass = ShowStatsButton.Content.ToString();
+        private void ShowStats_Click(object sender, RoutedEventArgs e)
+        {
+            Characters p = new Characters();
+            p.CharacterClass = ShowStatsButton.Content.ToString();
 
-        //    for (int i = 0; i < charList.Count; i++)
-        //    {
-        //        if (charList.ElementAt(i).CharacterClass == p.CharacterClass)
-        //            StatsPanel.DataContext = charList.ElementAt(i);
-        //    }
-        //}
+            for (int i = 0; i < charList.Count; i++)
+            {
+                if (charList.ElementAt(i).CharacterClass == p.CharacterClass)
+                    StatsPanel.DataContext = charList.ElementAt(i);
+            }
+        }
         private void Complete_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show($"Team is ready to slay");
