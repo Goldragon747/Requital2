@@ -36,6 +36,10 @@ namespace Requital
                 kill(attacker, defender);
             }
         }
+        public void turnOrder(List<Characters> c)
+        {
+            
+        }
         public int attackSpells(Characters attacker, Characters defender)
         {
             FireBall f = new FireBall();

@@ -48,7 +48,7 @@ namespace Requital
             }
             else if (ranEncounter >= 81 && ranEncounter < 91)
             {
-                encounter9();
+                Mirror();
             }
             else
             {
