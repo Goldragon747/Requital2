@@ -55,23 +55,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Assets.cs" />
-    <Compile Include="Character Classes\Cleric.cs" />
-    <Compile Include="Character Classes\ElfCleric.cs" />
-    <Compile Include="Character Classes\ElfMage.cs" />
-    <Compile Include="Character Classes\ElfRogue.cs" />
-    <Compile Include="Character Classes\ElfWarrior.cs" />
-    <Compile Include="Character Classes\GoblinRogue.cs" />
-    <Compile Include="Character Classes\Knight.cs" />
+    <Compile Include="Characters\Characters.cs" />
+    <Compile Include="Characters\Cleric.cs" />
+    <Compile Include="Characters\ElfCleric.cs" />
+    <Compile Include="Characters\ElfMage.cs" />
+    <Compile Include="Characters\ElfRogue.cs" />
+    <Compile Include="Characters\ElfWarrior.cs" />
+    <Compile Include="Characters\Goblin.cs" />
+    <Compile Include="Characters\GoblinRogue.cs" />
+    <Compile Include="Characters\Knight.cs" />
+    <Compile Include="Characters\Mage.cs" />
+    <Compile Include="Characters\Rogue.cs" />
+    <Compile Include="Characters\Skeleton.cs" />
+    <Compile Include="Characters\SkeletonArcher.cs" />
+    <Compile Include="Characters\Tian.cs" />
+    <Compile Include="Characters\Warrior.cs" />
     <Compile Include="Encounters.cs" />
-    <Compile Include="Character Classes\Goblin.cs" />
     <Compile Include="HitBox.cs" />
     <Compile Include="LevelUp.cs" />
-    <Compile Include="Character Classes\Mage.cs" />
-    <Compile Include="Character Classes\Rogue.cs" />
-    <Compile Include="Character Classes\Skeleton.cs" />
-    <Compile Include="Character Classes\SkeletonArcher.cs" />
-    <Compile Include="Character Classes\Tian.cs" />
-    <Compile Include="Character Classes\Warrior.cs" />
     <Compile Include="Spells\FireBall.cs" />
     <Compile Include="Trigger.cs" />
     <Compile Include="Spells\Heal.cs" />
@@ -88,7 +89,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Character Classes\Characters.cs" />
     <Compile Include="Combat.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
