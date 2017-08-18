@@ -20,7 +20,7 @@ namespace TestUserControls.UserControls
     /// </summary>
     public partial class CombatScreen : UserControl
     {
-        public int Enemies { get; set; } = 6;
+        public int Enemies { get; set; } = 9;
         public CombatScreen()
         {
             InitializeComponent();

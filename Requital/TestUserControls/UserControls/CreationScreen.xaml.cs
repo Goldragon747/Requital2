@@ -14,11 +14,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Requital;
 using System.Collections.ObjectModel;
+using Requital.ValueConverters;
 
 namespace TestUserControls.UserControls
 {
     public partial class CreationScreen : UserControl
     {
+        ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
             ObservableCollection<Characters> charList = new ObservableCollection<Characters>()
             {
                 new Warrior(), new Rogue(), new Mage(), new Cleric(),
@@ -35,20 +37,32 @@ namespace TestUserControls.UserControls
             {
                 if (createCounter < 4)
                 {
+                    Binding bind = new Binding("CharacterClass");
                     Characters p = new Characters();
-                    p.CharacterClass = NameLabel.Content.ToString();
-                    Label b = new Label();
-                    b.Background = Brushes.Moccasin;
-                    b.Width = 100;
-                    b.Height = 100;
-                    b.Content = $"{Username.Text} \nClass: {NameLabel.Content}";
-                    b.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    b.VerticalContentAlignment = VerticalAlignment.Center;
-                    b.DataContext = p;
-                    b.MouseLeftButtonDown += B_Click;
-                    b.MouseRightButtonDown += DeleteHero_Click;
+                    Image i = new Image();
+                    Label l = new Label();
 
-                    TeamGrid.Children.Add(b);
+                    WrapPanel wp = new WrapPanel();
+                    wp.Orientation = Orientation.Vertical;
+                    wp.Children.Add(l);
+                    wp.Children.Add(i);
+
+                    bind.Mode = BindingMode.OneWay;
+                    bind.Converter = c2iConverter;
+                    p.CharacterClass = NameLabel.Content.ToString();
+                    i.SetBinding(Image.SourceProperty, bind);
+                    i.Width = 100;
+                    i.Height = 100;
+
+                    l.Content = $"{Username.Text}";
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+
+                    i.DataContext = p;
+                    i.MouseLeftButtonDown += B_Click;
+                    i.MouseRightButtonDown += DeleteHero_Click;
+
+                    TeamGrid.Children.Add(wp);
                     createCounter++;
                 }
             }
@@ -89,8 +103,10 @@ namespace TestUserControls.UserControls
         private void DeleteHero_Click(object sender, RoutedEventArgs e)
         {
             createCounter--;
-            Label l = (Label)sender;
-            TeamGrid.Children.Remove(l);
+            //Label l = (Label)sender;
+            Image i = (Image)sender;
+            //i.Children.Clear();
+            TeamGrid.Children.Remove((WrapPanel)i.Parent);
             ReadyButton.Visibility = Visibility.Hidden;
 
         }

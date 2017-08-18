@@ -20,16 +20,15 @@
         <!--Choose Column-->
         <StackPanel Grid.Column="0" Background="CadetBlue">
             <!--ComboBox-->
-            <DockPanel Margin="110,5,110,20">
-                <ComboBox x:Name="ItemsComboBox" Background="AliceBlue" Height="30" IsEnabled="True">
+
+            <ComboBox x:Name="ItemsComboBox" Background="AliceBlue" Height="30" Margin="110,5,110,20">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label FontWeight="DemiBold" Content="{Binding CharacterClass}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            </DockPanel>
-            <!--Username-->
+                <!--Username-->
             <DockPanel Margin="0 25 290 50">
                 <Label Content="Hero Name" DockPanel.Dock="Top" FontSize="18"/>
                 <TextBox x:Name="Username" Background="Moccasin" HorizontalAlignment="Left"
