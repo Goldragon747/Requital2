@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Assets.cs" />
+    <Compile Include="Character.cs" />
     <Compile Include="Characters\Characters.cs" />
     <Compile Include="Characters\Cleric.cs" />
     <Compile Include="Characters\ElfCleric.cs" />
@@ -71,9 +72,12 @@
     <Compile Include="Characters\Tian.cs" />
     <Compile Include="Characters\Warrior.cs" />
     <Compile Include="Encounters.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="HitBox.cs" />
     <Compile Include="LevelUp.cs" />
     <Compile Include="Spells\FireBall.cs" />
+    <Compile Include="Spells\IronShell.cs" />
+    <Compile Include="Spells\Revive.cs" />
     <Compile Include="Trigger.cs" />
     <Compile Include="Spells\Heal.cs" />
     <Compile Include="Spells\Spells.cs" />
