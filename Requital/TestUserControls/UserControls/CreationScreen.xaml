@@ -38,7 +38,7 @@
             <!--ComboBox-->
             <WrapPanel HorizontalAlignment="Center" Margin="0 15 0 0">
                 <Button x:Name="PrevButton" Content="Prev" Click="Prev_Click" Height="25" Width="50" FontWeight="DemiBold"/>
-                <ComboBox x:Name="ItemsComboBox" FontWeight="DemiBold" SelectedIndex="0" Height="25"/>
+                <ComboBox x:Name="ItemsComboBox" FontWeight="DemiBold" Height="25"/>
                 <Button x:Name="NextButton" Content="Next" Click="Next_Click" Height="25" Width="50" FontWeight="DemiBold"/>
             </WrapPanel>
             <!--Username-->
@@ -63,6 +63,7 @@
                 <Style x:Key="LabelOutput">
                     <Setter Property="Label.Background" Value="Moccasin"/>
                     <Setter Property="Label.Height" Value="30"/>
+                    <Setter Property="Label.FontWeight" Value="DemiBold"/>
                     <Setter Property="Label.Margin" Value="0,10,110,10"/>
                     <Setter Property="Label.HorizontalContentAlignment" Value="Right"/>
                 </Style>

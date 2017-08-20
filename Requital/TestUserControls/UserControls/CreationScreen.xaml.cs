@@ -129,7 +129,7 @@ namespace TestUserControls.UserControls
 
         private void Prev_Click(object sender, RoutedEventArgs e)
         {
-            if(ItemsComboBox.SelectedIndex != 0)
+            if(ItemsComboBox.SelectedIndex != 0 && ItemsComboBox.SelectedIndex != -1)
                 ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex - 1;
         }
 
