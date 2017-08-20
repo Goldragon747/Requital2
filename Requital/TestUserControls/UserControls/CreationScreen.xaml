@@ -36,14 +36,11 @@
         <!--Choose Column-->
         <StackPanel Grid.Column="0" Grid.Row="1" Background="CadetBlue">
             <!--ComboBox-->
-
-            <ComboBox x:Name="ItemsComboBox" Height="30" Margin="110,5,110,20">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Label FontWeight="DemiBold" Content="{Binding CharacterClass}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <WrapPanel HorizontalAlignment="Center" Margin="0 15 0 0">
+                <Button x:Name="PrevButton" Content="Prev" Click="Prev_Click" Height="25" Width="50" FontWeight="DemiBold"/>
+                <ComboBox x:Name="ItemsComboBox" FontWeight="DemiBold" SelectedIndex="0" Height="25"/>
+                <Button x:Name="NextButton" Content="Next" Click="Next_Click" Height="25" Width="50" FontWeight="DemiBold"/>
+            </WrapPanel>
             <!--Username-->
             <DockPanel Margin="0 25 290 50">
                 <Label Content="Hero Name" DockPanel.Dock="Top" FontSize="18"/>
@@ -54,8 +51,8 @@
             <Button Content="Create Hero" FontSize="20" Click="Create_Click"/>
             <!--Preview Hero Button-->
             <Grid>
-                <Image Margin="0.5 100 0.5 0" Height="150" Source="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass, Converter={StaticResource ResourceKey=C2I}}"/>
-                <Button Margin="0.5 100 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass}"
+                <Image Margin="0.5 100 0.5 0" Height="150" Source="{Binding ElementName=ItemsComboBox, Path=SelectedItem, Converter={StaticResource ResourceKey=C2I}}"/>
+                <Button Margin="0.5 100 0.5 0" Height="150" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem}"
                         Opacity="0" Click="ShowStats_Click" x:Name="ShowStatsButton"/>
             </Grid>
         </StackPanel>
@@ -110,7 +107,7 @@
         <UniformGrid x:Name="TeamGrid" Background="CadetBlue" Grid.Column="2" Grid.Row="1"/>
         
         <!--Hidden Cheap Way Around Getting ComboBox.Items.CurrentItem-->
-        <Label x:Name="CheapLabel" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem.CharacterClass}" 
+        <Label x:Name="CheapLabel" Content="{Binding ElementName=ItemsComboBox, Path=SelectedItem}" 
                Visibility="Hidden"/>
     </Grid>
 </UserControl>

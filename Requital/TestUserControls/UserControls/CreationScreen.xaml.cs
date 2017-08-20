@@ -20,15 +20,19 @@ namespace TestUserControls.UserControls
 {
     public partial class CreationScreen : UserControl
     {
-        ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
-        List<Characters> charList = new List<Characters>() {
+        private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
+        private List<Characters> charList = new List<Characters>() {
             new Warrior(), new Rogue(), new Mage(), new Cleric(),
         };
-        List<Image> tempImg = new List<Image>();
+        private List<Image> tempImg = new List<Image>();//Holds current team in teamGrid
+        public List<Characters> dreamTeam = new List<Characters>(); //Has the official team roster
         public CreationScreen()
         {
             InitializeComponent();
-            ItemsComboBox.ItemsSource = charList;
+            ItemsComboBox.Items.Add(new Cleric().CharacterClass = "Cleric");
+            ItemsComboBox.Items.Add(new Mage().CharacterClass = "Mage");
+            ItemsComboBox.Items.Add(new Rogue().CharacterClass = "Rogue");
+            ItemsComboBox.Items.Add(new Warrior().CharacterClass = "Warrior");
         }
         int createCounter = 0;
         private void Create_Click(object sender, RoutedEventArgs e)
@@ -97,7 +101,7 @@ namespace TestUserControls.UserControls
                     StatsPanel.DataContext = charList.ElementAt(i);
             }
         }
-        public List<Characters> dreamTeam = new List<Characters>(); //Has the official team roster
+
         private void Complete_Click(object sender, RoutedEventArgs e)
         {
             dreamTeam.Clear();
@@ -123,5 +127,16 @@ namespace TestUserControls.UserControls
             ReadyButton.Visibility = Visibility.Hidden;
         }
 
+        private void Prev_Click(object sender, RoutedEventArgs e)
+        {
+            if(ItemsComboBox.SelectedIndex != 0)
+                ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex - 1;
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemsComboBox.SelectedIndex != 3)
+                ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex + 1;
+        }
     }
 }
