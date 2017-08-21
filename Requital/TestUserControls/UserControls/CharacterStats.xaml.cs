@@ -26,7 +26,7 @@ namespace TestUserControls.UserControls
             InitializeComponent();
             charList = new List<Characters>() { new Mage(), new Warrior(), new Cleric(), new Rogue()};
             CharacterButtons();
-            ExitButton();
+            //ExitButton();
         }
 
         private void ExitButton()

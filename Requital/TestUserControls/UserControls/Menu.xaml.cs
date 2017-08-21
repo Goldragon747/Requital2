@@ -35,10 +35,19 @@ namespace TestUserControls.UserControls
             CreditsLabel.Visibility = Visibility.Collapsed;
             HelpLabel.Visibility = Visibility.Visible;
         }
-
+        
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            MenuControl.Visibility = Visibility.Hidden;
+            if(CreditsLabel.Visibility != Visibility.Visible && HelpLabel.Visibility != Visibility.Visible)
+            {
+                MenuControl.Visibility = Visibility.Hidden;
+            }
+            if (CreditsLabel.Visibility == Visibility.Visible || HelpLabel.Visibility == Visibility.Visible)
+            {
+                CreditsLabel.Visibility = Visibility.Hidden;
+                HelpLabel.Visibility = Visibility.Hidden;
+            }
+
         }
     }
 }
