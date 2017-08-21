@@ -138,11 +138,17 @@ namespace TestUserControls.UserControls
                 MonsterGrid.Children.Add(b);
             }
         }
-
+        int pauseCounter = 0;
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
-            CombatControl.Visibility = Visibility.Hidden;
-            //CharacterStats.Visibility = Visibility.Visible;
+            pauseCounter++;
+            if(pauseCounter == 1)
+                CharacterStats.Visibility = Visibility.Visible;
+            else
+            {
+                CharacterStats.Visibility = Visibility.Hidden;
+                pauseCounter = 0;
+            }
         }
     }
 }

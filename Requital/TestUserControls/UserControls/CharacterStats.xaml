@@ -6,19 +6,19 @@
              xmlns:local="clr-namespace:TestUserControls.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="MainPanel">
+    <Grid x:Name="MainPanel" Background="CadetBlue">
         <Grid.Resources>
             <Style TargetType="Label">
-                <Setter Property="Label.Height" Value="25"/>
+                <Setter Property="Label.Height" Value="30"/>
                 <Setter Property="Label.Width" Value="100"/>
+                <Setter Property="Label.FontWeight" Value="DemiBold"/>
             </Style>
             <Style x:Key="LabelOutput">
-                <Setter Property="Label.Background" Value="CadetBlue"/>
-                <Setter Property="Label.Width" Value="100"/>
-                <Setter Property="Label.HorizontalAlignment" Value="Left"/>
+                <Setter Property="Label.Height" Value="30"/>
             </Style>
             <Style TargetType="DockPanel">
-                <Setter Property="DockPanel.Margin" Value="0,5,0,0"/>
+                <Setter Property="Label.FontWeight" Value="DemiBold"/>
+                <Setter Property="DockPanel.Margin" Value="0,25,0,0"/>
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
@@ -26,67 +26,69 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0">
+            <DockPanel>
+                <Label Content="Name"/>
+                <Label Content="{Binding Path=Name, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Class"/>
+                <Label Content="{Binding Path=CharacterClass, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Mana"/>
+                <Label Content="{Binding Path=Mana, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Physical Defense"/>
+                <Label Content="{Binding Path=PhysicalDefense, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Spell Power"/>
+                <Label Content="{Binding Path=SpellPower, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+        </StackPanel>
 
-        <DockPanel Grid.Column="0" Grid.Row="0">
-            <Label Content="Name"/>
-            <Label Content="{Binding Path=Name, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="0">
-            <Label Content="Level" Width="36"/>
+        <StackPanel Grid.Column="1">
+            <DockPanel>
+            <Label Content="Level" Width="40"/>
             <Label Content="{Binding Path=Level, Mode=OneWay}"
                    Width="23"/>
             <Label Content="Experience" Width="70"/>
             <Label Content="{Binding Path=Experience, Mode=OneWay}"
                    Width="71" Background="CadetBlue"
                    HorizontalAlignment="Left"/>
-        </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1">
-            <Label Content="Class"/>
-            <Label Content="{Binding Path=CharacterClass, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="1">
-            <Label Content="Health"/>
-            <Label Content="{Binding Path=Health, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="2">
-            <Label Content="Mana"/>
-            <Label Content="{Binding Path=Mana, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="2">
-            <Label Content="Magic Defense"/>
-            <Label Content="{Binding Path=MagicDefense, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="3">
-            <Label Content="Physical Defense"/>
-            <Label Content="{Binding Path=PhysicalDefense, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="3">
-            <Label Content="Attack"/>
-            <Label Content="{Binding Path=AttackPower, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="4">
-            <Label Content="Spell Power"/>
-            <Label Content="{Binding Path=SpellPower, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="4">
-            <Label Content="Speed"/>
-            <Label Content="{Binding Path=Speed, Mode=OneWay}"
-                   Style="{StaticResource LabelOutput}"/>
-        </DockPanel>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Health"/>
+                <Label Content="{Binding Path=Health, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Magic Defense"/>
+                <Label Content="{Binding Path=MagicDefense, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Attack"/>
+                <Label Content="{Binding Path=AttackPower, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Speed"/>
+                <Label Content="{Binding Path=Speed, Mode=OneWay}"
+                       Style="{StaticResource LabelOutput}"/>
+            </DockPanel>
+        </StackPanel>
+
+        <WrapPanel x:Name="ButtonPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

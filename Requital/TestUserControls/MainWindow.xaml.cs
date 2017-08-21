@@ -24,5 +24,17 @@ namespace TestUserControls
         {
             InitializeComponent();
         }
+
+        private void Menu_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Menu.Visibility == Visibility.Hidden)
+                CreationS.Visibility = Visibility.Visible;
+        }
+
+        private void CreationS_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (CreationS.Visibility == Visibility.Collapsed)
+                Combat.Visibility = Visibility.Visible;
+        }
     }
 }
