@@ -4,7 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestUserControls.UserControls"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" x:Name="CombatControl">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Pause" Executed="Pause_Command"/>
+    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Key="P" Modifiers="Ctrl" Command="Pause"/>
+    </UserControl.InputBindings>
     <Grid x:Name="Options">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
@@ -15,7 +21,6 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        
         <!--Monster Grid-->
         <UniformGrid x:Name="MonsterGrid" Background="Yellow" Grid.ColumnSpan="2" Columns="3" Rows="3"/>
 
@@ -55,5 +60,6 @@
             <Button x:Name="BackButton" Click="Close_Click" Grid.Row="0"/>
             <WrapPanel x:Name="ViewMagic" Grid.Row="1"/>
         </Grid>
+        <local:CharacterStats x:Name="CharacterStats" Visibility="Hidden"/>
     </Grid>
 </UserControl>
