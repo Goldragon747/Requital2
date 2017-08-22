@@ -51,7 +51,7 @@ namespace Requital
         {
             // MAPS \\
             cave.BeginInit();
-            cave.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Maps/Cave_Map.png");
+            cave.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Maps/Cave_Map_3.png");
             cave.EndInit();
 
             // ROUGE \\
