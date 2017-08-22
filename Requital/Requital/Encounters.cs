@@ -44,7 +44,7 @@ namespace Requital
             }
             else if (ranEncounter >= 71 && ranEncounter < 81)
             {
-                //encounter8();
+                powerOverwhelming();
             }
             else if (ranEncounter >= 81 && ranEncounter < 91)
             {
