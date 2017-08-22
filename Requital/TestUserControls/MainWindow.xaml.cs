@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Requital;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,16 +26,21 @@ namespace TestUserControls
             InitializeComponent();
         }
 
-        private void Menu_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Menu.Visibility == Visibility.Hidden)
-                CreationS.Visibility = Visibility.Visible;
-        }
+        //private void Menu_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    if (Menu.Visibility == Visibility.Hidden)
+        //        CreationS.Visibility = Visibility.Visible;
+        //}
 
         private void CreationS_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (CreationS.Visibility == Visibility.Collapsed)
                 Combat.Visibility = Visibility.Visible;
+            //Combat.DreamTeam = CreationS.DreamTeam;
+            for (int i = 0; i < CreationS.DreamTeam.Count; i++)
+            {
+                Combat.DreamTeam.Add(CreationS.DreamTeam.ElementAt(i));
+            }
         }
     }
 }

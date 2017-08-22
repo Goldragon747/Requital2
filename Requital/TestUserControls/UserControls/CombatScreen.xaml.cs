@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Requital;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace TestUserControls.UserControls
     /// </summary>
     public partial class CombatScreen : UserControl
     {
+        private List<Characters> dreamTeam = new List<Characters>();
+        public List<Characters> DreamTeam { get { return dreamTeam; } set { dreamTeam = value; } }
         public int Enemies { get; set; } = 9;
         public CombatScreen()
         {
@@ -116,12 +119,12 @@ namespace TestUserControls.UserControls
         }
         private void HeroGrid()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < dreamTeam.Count; i++)
             {
                 Button b = new Button();
                 b.Width = 50;
                 b.Height = 75;
-                b.Content = $"Hero\n{i}";
+                b.Content = $"{DreamTeam.ElementAt(i).characterName}";
                 b.Background = Brushes.Aqua;
                 CharacterGrid.Children.Add(b);
             }
