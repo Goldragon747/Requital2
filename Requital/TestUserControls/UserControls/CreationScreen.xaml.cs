@@ -20,20 +20,24 @@ namespace TestUserControls.UserControls
 {
     public partial class CreationScreen : UserControl
     {
-        ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
-            ObservableCollection<Characters> charList = new ObservableCollection<Characters>()
-            {
-                new Warrior(), new Rogue(), new Mage(), new Cleric(),
-            };
+        private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
+        private List<Characters> charList = new List<Characters>() {
+            new Warrior(), new Rogue(), new Mage(), new Cleric(),
+        };
+        private List<Image> tempImg = new List<Image>();//Holds current team in teamGrid
+        public List<Characters> dreamTeam = new List<Characters>(); //Has the official team roster
         public CreationScreen()
         {
             InitializeComponent();
-            ItemsComboBox.ItemsSource = charList;
+            ItemsComboBox.Items.Add(new Cleric().CharacterClass = "Cleric");
+            ItemsComboBox.Items.Add(new Mage().CharacterClass = "Mage");
+            ItemsComboBox.Items.Add(new Rogue().CharacterClass = "Rogue");
+            ItemsComboBox.Items.Add(new Warrior().CharacterClass = "Warrior");
         }
         int createCounter = 0;
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            if(NameLabel.Content != null)
+            if(CheapLabel.Content != null)
             {
                 if (createCounter < 4)
                 {
@@ -44,17 +48,20 @@ namespace TestUserControls.UserControls
 
                     WrapPanel wp = new WrapPanel();
                     wp.Orientation = Orientation.Vertical;
+                    wp.HorizontalAlignment = HorizontalAlignment.Center;
+                    wp.VerticalAlignment = VerticalAlignment.Center;
                     wp.Children.Add(l);
                     wp.Children.Add(i);
 
                     bind.Mode = BindingMode.OneWay;
                     bind.Converter = c2iConverter;
-                    p.CharacterClass = NameLabel.Content.ToString();
+                    p.CharacterClass = CheapLabel.Content.ToString();
+                    p.characterName = Username.Text;
                     i.SetBinding(Image.SourceProperty, bind);
                     i.Width = 100;
                     i.Height = 100;
 
-                    l.Content = $"{Username.Text}";
+                    l.Content = Username.Text;
                     l.HorizontalContentAlignment = HorizontalAlignment.Center;
                     l.VerticalContentAlignment = VerticalAlignment.Center;
 
@@ -63,18 +70,17 @@ namespace TestUserControls.UserControls
                     i.MouseRightButtonDown += DeleteHero_Click;
 
                     TeamGrid.Children.Add(wp);
+                    tempImg.Add(i);
                     createCounter++;
                 }
             }
-            
-
             if (createCounter == 4)
                 ReadyButton.Visibility = Visibility.Visible;
         }
 
         private void B_Click(object sender, RoutedEventArgs e)
         {
-            Label b = ((Label)sender);
+            Image b = ((Image)sender);
             Characters p = (Characters)b.DataContext;
             
             for (int i = 0; i < charList.Count; i++)
@@ -95,21 +101,42 @@ namespace TestUserControls.UserControls
                     StatsPanel.DataContext = charList.ElementAt(i);
             }
         }
+
         private void Complete_Click(object sender, RoutedEventArgs e)
         {
+            dreamTeam.Clear();
+            for (int i = 0; i < tempImg.Count; i++)
+            {
+                Characters c = (Characters)tempImg.ElementAt(i).DataContext;
+                dreamTeam.Add(c);
+            }
             MessageBox.Show($"Team is ready to slay");
+            CreationScreenControl.Visibility = Visibility.Collapsed;
         }
 
         private void DeleteHero_Click(object sender, RoutedEventArgs e)
         {
             createCounter--;
-            //Label l = (Label)sender;
             Image i = (Image)sender;
-            //i.Children.Clear();
             TeamGrid.Children.Remove((WrapPanel)i.Parent);
-            ReadyButton.Visibility = Visibility.Hidden;
 
+            for (int x = 0; x < tempImg.Count; x++) {
+                if (tempImg.ElementAt(x) == i)
+                    tempImg.RemoveAt(x);
+            }
+            ReadyButton.Visibility = Visibility.Hidden;
         }
 
+        private void Prev_Click(object sender, RoutedEventArgs e)
+        {
+            if(ItemsComboBox.SelectedIndex != 0 && ItemsComboBox.SelectedIndex != -1)
+                ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex - 1;
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemsComboBox.SelectedIndex != 3)
+                ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex + 1;
+        }
     }
 }

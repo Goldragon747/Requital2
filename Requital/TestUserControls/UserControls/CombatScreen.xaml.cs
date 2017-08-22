@@ -41,7 +41,6 @@ namespace TestUserControls.UserControls
 
         private void Magic_Click(object sender, RoutedEventArgs e)
         {
-            
             ViewMagicGrid.Width = ActualWidth;
             ViewMagicGrid.Height = ActualHeight;
             ViewMagicGrid.Visibility = Visibility.Visible;
@@ -51,8 +50,6 @@ namespace TestUserControls.UserControls
             BackButton.VerticalContentAlignment = VerticalAlignment.Top;
             BackButton.Background = Brushes.Aqua;
             BackButton.Width = ActualWidth;
-            
-            
         }
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
@@ -128,8 +125,6 @@ namespace TestUserControls.UserControls
                 b.Background = Brushes.Aqua;
                 CharacterGrid.Children.Add(b);
             }
-            
-
         }
         private void EnemyGrid(int enemies)
         {
@@ -141,6 +136,18 @@ namespace TestUserControls.UserControls
                 b.Content = $"Enemy\n{i}";
                 b.Background = Brushes.Crimson;
                 MonsterGrid.Children.Add(b);
+            }
+        }
+        int pauseCounter = 0;
+        private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
+        {
+            pauseCounter++;
+            if(pauseCounter == 1)
+                CharacterStats.Visibility = Visibility.Visible;
+            else
+            {
+                CharacterStats.Visibility = Visibility.Hidden;
+                pauseCounter = 0;
             }
         }
     }
