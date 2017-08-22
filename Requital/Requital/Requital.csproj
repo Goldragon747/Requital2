@@ -177,9 +177,6 @@
     <Resource Include="assets\Maps\Cave.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\Maps\FinalCave.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="assets\Cleric.png" />
   </ItemGroup>
   <ItemGroup>
