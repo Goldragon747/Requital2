@@ -14,53 +14,73 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Requital;
 using System.Collections.ObjectModel;
+using Requital.ValueConverters;
 
 namespace TestUserControls.UserControls
 {
     public partial class CreationScreen : UserControl
     {
-            ObservableCollection<Characters> charList = new ObservableCollection<Characters>()
-            {
-                new Warrior(), new Rogue(), new Mage(), new Cleric(),
-            };
+        private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
+        private List<Characters> charList = new List<Characters>() {
+            new Warrior(), new Rogue(), new Mage(), new Cleric(),
+        };
+        private List<Image> tempImg = new List<Image>();//Holds current team in teamGrid
+        public List<Characters> dreamTeam = new List<Characters>(); //Has the official team roster
         public CreationScreen()
         {
             InitializeComponent();
-            ItemsComboBox.ItemsSource = charList;
+            ItemsComboBox.Items.Add(new Cleric().CharacterClass = "Cleric");
+            ItemsComboBox.Items.Add(new Mage().CharacterClass = "Mage");
+            ItemsComboBox.Items.Add(new Rogue().CharacterClass = "Rogue");
+            ItemsComboBox.Items.Add(new Warrior().CharacterClass = "Warrior");
         }
         int createCounter = 0;
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            if(NameLabel.Content != null)
+            if(CheapLabel.Content != null)
             {
                 if (createCounter < 4)
                 {
+                    Binding bind = new Binding("CharacterClass");
                     Characters p = new Characters();
-                    p.CharacterClass = NameLabel.Content.ToString();
-                    Label b = new Label();
-                    b.Background = Brushes.Moccasin;
-                    b.Width = 100;
-                    b.Height = 100;
-                    b.Content = $"{Username.Text} \nClass: {NameLabel.Content}";
-                    b.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    b.VerticalContentAlignment = VerticalAlignment.Center;
-                    b.DataContext = p;
-                    b.MouseLeftButtonDown += B_Click;
-                    b.MouseRightButtonDown += DeleteHero_Click;
+                    Image i = new Image();
+                    Label l = new Label();
 
-                    TeamGrid.Children.Add(b);
+                    WrapPanel wp = new WrapPanel();
+                    wp.Orientation = Orientation.Vertical;
+                    wp.HorizontalAlignment = HorizontalAlignment.Center;
+                    wp.VerticalAlignment = VerticalAlignment.Center;
+                    wp.Children.Add(l);
+                    wp.Children.Add(i);
+
+                    bind.Mode = BindingMode.OneWay;
+                    bind.Converter = c2iConverter;
+                    p.CharacterClass = CheapLabel.Content.ToString();
+                    p.characterName = Username.Text;
+                    i.SetBinding(Image.SourceProperty, bind);
+                    i.Width = 100;
+                    i.Height = 100;
+
+                    l.Content = Username.Text;
+                    l.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    l.VerticalContentAlignment = VerticalAlignment.Center;
+
+                    i.DataContext = p;
+                    i.MouseLeftButtonDown += B_Click;
+                    i.MouseRightButtonDown += DeleteHero_Click;
+
+                    TeamGrid.Children.Add(wp);
+                    tempImg.Add(i);
                     createCounter++;
                 }
             }
-            
-
             if (createCounter == 4)
                 ReadyButton.Visibility = Visibility.Visible;
         }
 
         private void B_Click(object sender, RoutedEventArgs e)
         {
-            Label b = ((Label)sender);
+            Image b = ((Image)sender);
             Characters p = (Characters)b.DataContext;
             
             for (int i = 0; i < charList.Count; i++)
@@ -81,19 +101,42 @@ namespace TestUserControls.UserControls
                     StatsPanel.DataContext = charList.ElementAt(i);
             }
         }
+
         private void Complete_Click(object sender, RoutedEventArgs e)
         {
+            dreamTeam.Clear();
+            for (int i = 0; i < tempImg.Count; i++)
+            {
+                Characters c = (Characters)tempImg.ElementAt(i).DataContext;
+                dreamTeam.Add(c);
+            }
             MessageBox.Show($"Team is ready to slay");
+            CreationScreenControl.Visibility = Visibility.Collapsed;
         }
 
         private void DeleteHero_Click(object sender, RoutedEventArgs e)
         {
             createCounter--;
-            Label l = (Label)sender;
-            TeamGrid.Children.Remove(l);
-            ReadyButton.Visibility = Visibility.Hidden;
+            Image i = (Image)sender;
+            TeamGrid.Children.Remove((WrapPanel)i.Parent);
 
+            for (int x = 0; x < tempImg.Count; x++) {
+                if (tempImg.ElementAt(x) == i)
+                    tempImg.RemoveAt(x);
+            }
+            ReadyButton.Visibility = Visibility.Hidden;
         }
 
+        private void Prev_Click(object sender, RoutedEventArgs e)
+        {
+            if(ItemsComboBox.SelectedIndex != 0 && ItemsComboBox.SelectedIndex != -1)
+                ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex - 1;
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemsComboBox.SelectedIndex != 3)
+                ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex + 1;
+        }
     }
 }
