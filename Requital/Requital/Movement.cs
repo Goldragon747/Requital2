@@ -174,39 +174,68 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        Y += 1;
-                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
+                        if (!mainWindow.Triggered)
+                        {
+                            Y += 1;
+                            mainWindow.MoveCanvasTop(Y);
+                        } else
+                        {
+                            Y -= 5;
+                            mainWindow.MoveCanvasTop(Y);
+                        }
+                        
                     }
                 }
                 else if (direction == 3)
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        Y -= 1;
-                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
+                        if (!mainWindow.Triggered)
+                        {
+                            Y -= 1;
+                            mainWindow.MoveCanvasTop(Y);
+                        }  else
+                        {
+                            Y += 5;
+                            mainWindow.MoveCanvasTop(Y);
+                        }
                     }
                 }
                 else if (direction == 4)
                 {
                     for (int i = 0; i < 19; i++)
                     {
-                        X += 1;
-                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
+                        if (!mainWindow.Triggered)
+                        {
+                            X += 1;
+                            mainWindow.MoveCanvasLeft(X);
+                        } else
+                        {
+                            X -= 5;
+                            mainWindow.MoveCanvasLeft(X);
+                        }
                     }
                 }
                 else if (direction == 2)
                 {
                     for (int i = 0; i < 19; i++)
                     {
-                        X -= 1;
-                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        
+                        if (!mainWindow.Triggered)
+                        {
+                            X -= 1;
+                            mainWindow.MoveCanvasLeft(X);
+                        } else
+                        {
+                            X += 5;
+                            mainWindow.MoveCanvasLeft(X);
+                        }
                     }
                 }
+                mainWindow.TryTriggerCombat();
                 if(!mainWindow.Triggered)
                 {
                     //mainWindow.MovementScreen.Debug.Content = mainWindow.Triggered; //REMOVE ---------------------------------------------
