@@ -19,8 +19,8 @@ namespace Requital
 
         MainWindow mainWindow;
 
-        private double x = 0;
-        private double y = 0;
+        private double x = -2750;
+        private double y = -4300;
 
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
@@ -174,16 +174,14 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
+                        Y += 1;
+                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            Y += 1;
+                            Y -= 3;
                             mainWindow.MoveCanvasTop(Y);
-                        } else
-                        {
-                            Y -= 5;
-                            mainWindow.MoveCanvasTop(Y);
-                        }
+                        } 
                         
                     }
                 }
@@ -191,48 +189,42 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
+                        Y -= 1;
+                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            Y -= 1;
+                            Y += 3;
                             mainWindow.MoveCanvasTop(Y);
-                        }  else
-                        {
-                            Y += 5;
-                            mainWindow.MoveCanvasTop(Y);
-                        }
+                        } 
                     }
                 }
                 else if (direction == 4)
                 {
                     for (int i = 0; i < 19; i++)
                     {
+                        X += 1;
+                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            X += 1;
+                            X -= 3;
                             mainWindow.MoveCanvasLeft(X);
-                        } else
-                        {
-                            X -= 5;
-                            mainWindow.MoveCanvasLeft(X);
-                        }
+                        } 
                     }
                 }
                 else if (direction == 2)
                 {
                     for (int i = 0; i < 19; i++)
                     {
+                        X -= 1;
+                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            X -= 1;
+                            X += 3;
                             mainWindow.MoveCanvasLeft(X);
-                        } else
-                        {
-                            X += 5;
-                            mainWindow.MoveCanvasLeft(X);
-                        }
+                        } 
                     }
                 }
                 mainWindow.TryTriggerCombat();

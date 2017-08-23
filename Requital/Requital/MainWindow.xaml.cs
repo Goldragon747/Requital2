@@ -21,6 +21,7 @@ namespace Requital
         
         public Assets assets;
         public Movement movementLogic;
+        public Encounters encounter;
         private bool triggered = false;
         int counter = 0;
         public bool Triggered { get => triggered; set => triggered = value; }
@@ -30,6 +31,7 @@ namespace Requital
             InitializeComponent();
             assets = new Assets();
             assets.LoadImages();
+            encounter = new Encounters();
             movementLogic = new Movement(this);
             BuildCanvas();
             HitBox hitboxes = new HitBox(MovementScreen.Map);
@@ -39,6 +41,8 @@ namespace Requital
         {
             MovementScreen.MovementBackground = assets.cave;
             MovementScreen.Sprite = assets.rouge_right_1;
+            MoveCanvasTop(movementLogic.Y);
+            MoveCanvasLeft(movementLogic.X);
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
             this.KeyUp += new KeyEventHandler(OnButtonKeyUp);
         }
@@ -82,8 +86,8 @@ namespace Requital
                     counter++;
                     MovementScreen.Debug.Content = $"{counter} : x1 {x1} : y1 {y1} : { triggered } left {leftBound} : right {rightBound} : bottom {bottomBound} : top {topBound} ";
                     if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
-                        (x1 - 60 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
-                        (x1 - 60 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
+                        (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                        (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
                         (x1 <= leftBound && x1 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound))
                     {
                         returnBool = true;
@@ -103,6 +107,7 @@ namespace Requital
         public void TriggerCombat()
         {
             MovementScreen.Visibility = Visibility.Hidden;
+            //CS.Enemies = encounter.pickEncounter;
             CS.Visibility = Visibility.Visible;
         }
     }

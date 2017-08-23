@@ -12,7 +12,7 @@
         x:Name="mainWindow">
     <Grid>
         <ms:MovementScreen x:Name="MovementScreen"/>
-        <uc:CombatScreen 
+        <uc:CombatScreen
             x:Name="CS"
             Visibility="Hidden"/>
     </Grid>

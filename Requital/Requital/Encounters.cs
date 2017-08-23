@@ -10,37 +10,37 @@ namespace Requital
     public class Encounters
     {
         Random r = new Random();
-        public void pickEncounter()
+        public List<Characters> pickEncounter()
         {
-            
+            List<Characters> encounter = new List<Characters>();
             int ranEncounter = r.Next(100);
             if (ranEncounter >= 0 && ranEncounter < 11)
             {
-                caveEncounter1();
+                encounter = caveEncounter1();
             }
             else if (ranEncounter >= 11 && ranEncounter < 21)
             {
-                caveEncounter2();
+                encounter = caveEncounter2();
             }
             else if (ranEncounter >= 21 && ranEncounter < 31)
             {
-                forestEncounter1();
+                encounter = forestEncounter1();
             }
             else if (ranEncounter >= 31 && ranEncounter < 41)
             {
-                forestEncounter2();
+                encounter = forestEncounter2();
             }
             else if (ranEncounter >= 41 && ranEncounter < 51)
             {
-                forestEncounter3();
+                encounter = forestEncounter3();
             }
             else if (ranEncounter >= 51 && ranEncounter < 61)
             {
-                caveEncounter3();
+                encounter = caveEncounter3();
             }
             else if (ranEncounter >= 61 && ranEncounter < 71)
             {
-                wimpyEncounter();
+                encounter = wimpyEncounter();
             }
             else if (ranEncounter >= 71 && ranEncounter < 81)
             {
@@ -48,12 +48,13 @@ namespace Requital
             }
             else if (ranEncounter >= 81 && ranEncounter < 91)
             {
-                Mirror();
+                encounter = Mirror();
             }
             else
             {
-                encounter10();
+                //encounter = encounter10();
             }
+            return encounter;
         }
 
         private List<Characters> caveEncounter1()
