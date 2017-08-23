@@ -67,22 +67,35 @@ namespace Requital
 
         public bool HitDetection()
         {
+            //MovementScreen.Debug.Content = $"{ MovementScreen.Map.Children.Count }";
+            //MovementScreen.Debug.Content = $"{ triggered }";
+            bool returnBool = false;
             foreach (UIElement item in MovementScreen.Map.Children)
             {
-                if (item is Shape)
+                if (item is Rectangle)
                 {
                     Rectangle t = (Rectangle)item;
-                    //double x1 = ((movementLogic.X + 570) - (Canvas.GetLeft(t)));
-                    //double y1 = ((movementLogic.Y + 300) - (Canvas.GetTop(t)));
                     double x1 = movementLogic.X - 570;
                     double y1 = movementLogic.Y - 300;
+                    double leftBound = -(Canvas.GetLeft(t));
+                    double rightBound = -(Canvas.GetLeft(t) + t.Width);
+                    double topBound = -(Canvas.GetTop(t));
+                    double bottomBound = -(Canvas.GetTop(t) + t.Height);
                     counter++;
-                    MovementScreen.Debug.Content = $"{counter} : {x1} : {y1} : { triggered }";
-                    return (x1 >= (movementLogic.X + Canvas.GetLeft(t)) && x1 <= (movementLogic.X + Canvas.GetLeft(t)) + t.Width) 
-                        && (y1 >= (movementLogic.Y + Canvas.GetTop(t)) && y1 <= (movementLogic.Y + Canvas.GetTop(t)) + t.Height);
+                    MovementScreen.Debug.Content = $"{counter} : x1 {x1} : y1 {y1} : { triggered } left {leftBound} : right {rightBound} : bottom {bottomBound} : top {topBound} ";
+                    //if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound)){
+                    //    returnBool = true;
+                    //}
+                    if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                        (x1 - 60 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                        (x1 - 60 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
+                        (x1 <= leftBound && x1 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound))
+                    {
+                        returnBool = true;
+                    } 
                 }
             }
-            return false;
+            return returnBool;
         }
     }
 }

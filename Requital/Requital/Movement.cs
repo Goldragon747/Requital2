@@ -174,8 +174,8 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        X += 1;
-                        mainWindow.MoveCanvasTop(X);
+                        Y += 1;
+                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
                     }
                 }
@@ -183,8 +183,8 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        X -= 1;
-                        mainWindow.MoveCanvasTop(X);
+                        Y -= 1;
+                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
                     }
                 }
@@ -192,8 +192,8 @@ namespace Requital
                 {
                     for (int i = 0; i < 19; i++)
                     {
-                        Y += 1;
-                        mainWindow.MoveCanvasLeft(Y);
+                        X += 1;
+                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
                     }
                 }
@@ -201,8 +201,8 @@ namespace Requital
                 {
                     for (int i = 0; i < 19; i++)
                     {
-                        Y -= 1;
-                        mainWindow.MoveCanvasLeft(Y);
+                        X -= 1;
+                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
                         
                     }
