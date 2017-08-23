@@ -22,6 +22,8 @@ namespace Requital
         private double x = -2750;
         private double y = -4300;
 
+        private int speed = 1;
+
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
 
@@ -174,7 +176,7 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        Y += 1;
+                        Y += speed;
                         mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
                         if (mainWindow.Triggered)
@@ -189,7 +191,7 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        Y -= 1;
+                        Y -= speed;
                         mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
                         if (mainWindow.Triggered)
@@ -203,7 +205,7 @@ namespace Requital
                 {
                     for (int i = 0; i < 19; i++)
                     {
-                        X += 1;
+                        X += speed;
                         mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
                         if (mainWindow.Triggered)
@@ -217,7 +219,7 @@ namespace Requital
                 {
                     for (int i = 0; i < 19; i++)
                     {
-                        X -= 1;
+                        X -= speed;
                         mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
                         if (mainWindow.Triggered)
