@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="TestUserControls.UserControls.CombatScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestUserControls.UserControls"
+             mc:Ignorable="d" x:Name="CombatControl">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Pause" Executed="Pause_Command"/>
+    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Key="P" Modifiers="Ctrl" Command="Pause"/>
+    </UserControl.InputBindings>
+    <Grid x:Name="Options">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <!--Monster Grid-->
+        <UniformGrid x:Name="MonsterGrid" Background="Yellow" Grid.ColumnSpan="2" Columns="3" Rows="3"/>
+
+        <!--Character Grid-->
+        <UniformGrid x:Name="CharacterGrid" Background="Gray" Grid.Column="2" Columns="1"/>
+
+        <!--Mini Monster Stats-->
+        <WrapPanel x:Name="MonStats" Background="LightGreen" Grid.Row="1" Grid.Column="0" Orientation="Horizontal"/>
+
+        <!--View Options-->
+        <UniformGrid x:Name="OptionsPanel" Grid.Row="1" Grid.Column="1" Background="Blue">
+            <UniformGrid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Button.HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Button.VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Button.FontSize" Value="24"/>
+                </Style>
+            </UniformGrid.Resources>
+            <Button x:Name="Attack" Content="Attack" Click="Attack_Click"/>
+            <Button x:Name="Magic" Content="Magic" Click="Magic_Click"
+                FontStyle="Italic"/>
+            <Button x:Name="Defend" Content="Defend" Click="Defend_Click"
+                FontWeight="Heavy"/>
+            <Button x:Name="Flee" Content="Flee" Click="Flee_Click"
+                FontStyle="Oblique"/>
+        </UniformGrid>
+
+        <!--Mini Character Stats-->
+        <WrapPanel x:Name="CharStats" Background="Chocolate" Grid.Row="1" Grid.Column="2"/>
+
+        <!--Magic Menu-->
+        <Grid x:Name="ViewMagicGrid" Visibility="Hidden" Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="BackButton" Click="Close_Click" Grid.Row="0"/>
+            <WrapPanel x:Name="ViewMagic" Grid.Row="1"/>
+        </Grid>
+        
+        <local:CharacterStats x:Name="CharacterStats" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2"
+                              Grid.Column="0" Grid.ColumnSpan="3"/>
+    </Grid>
+</UserControl>

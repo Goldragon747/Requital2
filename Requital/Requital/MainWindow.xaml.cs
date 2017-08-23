@@ -67,8 +67,6 @@ namespace Requital
 
         public bool HitDetection()
         {
-            //MovementScreen.Debug.Content = $"{ MovementScreen.Map.Children.Count }";
-            //MovementScreen.Debug.Content = $"{ triggered }";
             bool returnBool = false;
             foreach (UIElement item in MovementScreen.Map.Children)
             {
@@ -83,9 +81,6 @@ namespace Requital
                     double bottomBound = -(Canvas.GetTop(t) + t.Height);
                     counter++;
                     MovementScreen.Debug.Content = $"{counter} : x1 {x1} : y1 {y1} : { triggered } left {leftBound} : right {rightBound} : bottom {bottomBound} : top {topBound} ";
-                    //if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound)){
-                    //    returnBool = true;
-                    //}
                     if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
                         (x1 - 60 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
                         (x1 - 60 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
