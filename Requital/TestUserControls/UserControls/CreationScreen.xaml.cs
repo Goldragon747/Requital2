@@ -15,17 +15,27 @@ using System.Windows.Shapes;
 using Requital;
 using System.Collections.ObjectModel;
 using Requital.ValueConverters;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TestUserControls.UserControls
 {
-    public partial class CreationScreen : UserControl
+    public partial class CreationScreen : UserControl, INotifyPropertyChanged
     {
         private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
         private List<Characters> charList = new List<Characters>() {
             new Warrior(), new Rogue(), new Mage(), new Cleric(),
         };
         private List<Image> tempImg = new List<Image>();//Holds current team in teamGrid
-        public List<Characters> dreamTeam = new List<Characters>(); //Has the official team roster
+        private List<Characters> dreamTeam = new List<Characters>(); //Has the official team roster
+        public List<Characters> DreamTeam { get { return dreamTeam; } set { dreamTeam = value; FieldChanged(); } }
+
+        protected void FieldChanged([CallerMemberName] string field = null) {
+            if (PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(field));
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
         public CreationScreen()
         {
             InitializeComponent();
@@ -35,6 +45,8 @@ namespace TestUserControls.UserControls
             ItemsComboBox.Items.Add(new Warrior().CharacterClass = "Warrior");
         }
         int createCounter = 0;
+
+
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             if(CheapLabel.Content != null)
