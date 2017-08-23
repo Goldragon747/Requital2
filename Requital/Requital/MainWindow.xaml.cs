@@ -92,5 +92,18 @@ namespace Requital
             }
             return returnBool;
         }
+        public void TryTriggerCombat()
+        {
+            Random ran = new Random();
+            if (ran.Next(200) == 55)
+            {
+                //TriggerCombat();
+            }
+        }
+        public void TriggerCombat()
+        {
+            MovementScreen.Visibility = Visibility.Hidden;
+            CS.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ms="clr-namespace:Requital.Windows"
+        xmlns:uc="clr-namespace:TestUserControls.UserControls"
         xmlns:local="clr-namespace:Requital"
         mc:Ignorable="d"
         Title="Requital"
@@ -11,5 +12,8 @@
         x:Name="mainWindow">
     <Grid>
         <ms:MovementScreen x:Name="MovementScreen"/>
+        <uc:CombatScreen 
+            x:Name="CS"
+            Visibility="Hidden"/>
     </Grid>
 </Window>
