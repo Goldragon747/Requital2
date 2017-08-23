@@ -22,15 +22,18 @@ namespace Requital
         public void BuildTriggers()
         {
             CreateAndPlaceBox(100, 100, 100, 100);
-            CreateAndPlaceBox(200, 100, 100, 100);
-            CreateAndPlaceBox(300, 100, 100, 100);
+            CreateAndPlaceBox(100, 100, 300, 100);
+            CreateAndPlaceBox(100, 100, 500, 100);
         }
         public void CreateAndPlaceBox(int width, int height,int x, int y)
         {
-            Trigger t = new Trigger(width, height);
-            Map.Children.Add(t.Box);
-            Canvas.SetTop(t.Box, x);
-            Canvas.SetLeft(t.Box, y);
+            Rectangle t = new Rectangle();
+            t.Width = width;
+            t.Height = height;
+            t.Fill = Brushes.DarkSalmon;
+            Map.Children.Add(t);
+            Canvas.SetTop(t, x);
+            Canvas.SetLeft(t, y);
         }
         
     }

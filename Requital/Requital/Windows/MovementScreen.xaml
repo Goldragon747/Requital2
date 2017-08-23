@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Requital.Windows"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="650" d:DesignWidth="1250">
     <Grid>
         <Canvas x:Name="mainCanvas">
             <Canvas x:Name="Map">
@@ -19,7 +19,7 @@
                    Canvas.Top="300"
                    Canvas.Left="570"/>
             <Label x:Name="Debug"
-                   Width="200"
+                   Width="400"
                    Height="30"
                    Margin="5"
                    Background="MediumVioletRed"/>
