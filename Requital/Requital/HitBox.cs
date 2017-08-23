@@ -21,9 +21,7 @@ namespace Requital
         }
         public void BuildTriggers()
         {
-            CreateAndPlaceBox(100, 100, 100, 100);
-            CreateAndPlaceBox(100, 100, 300, 100);
-            CreateAndPlaceBox(100, 100, 500, 100);
+            CreateAndPlaceBox(800, 800, 3900, 4000);
         }
         public void CreateAndPlaceBox(int width, int height,int x, int y)
         {
@@ -32,8 +30,8 @@ namespace Requital
             t.Height = height;
             t.Fill = Brushes.DarkSalmon;
             Map.Children.Add(t);
-            Canvas.SetTop(t, x);
-            Canvas.SetLeft(t, y);
+            Canvas.SetTop(t, y);
+            Canvas.SetLeft(t, x);
         }
         
     }

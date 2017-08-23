@@ -19,8 +19,8 @@ namespace Requital
 
         MainWindow mainWindow;
 
-        private double x = 0;
-        private double y = 0;
+        private double x = -2750;
+        private double y = -4300;
 
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
@@ -177,6 +177,12 @@ namespace Requital
                         Y += 1;
                         mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
+                        if (mainWindow.Triggered)
+                        {
+                            Y -= 3;
+                            mainWindow.MoveCanvasTop(Y);
+                        } 
+                        
                     }
                 }
                 else if (direction == 3)
@@ -186,6 +192,11 @@ namespace Requital
                         Y -= 1;
                         mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
+                        if (mainWindow.Triggered)
+                        {
+                            Y += 3;
+                            mainWindow.MoveCanvasTop(Y);
+                        } 
                     }
                 }
                 else if (direction == 4)
@@ -195,6 +206,11 @@ namespace Requital
                         X += 1;
                         mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
+                        if (mainWindow.Triggered)
+                        {
+                            X -= 3;
+                            mainWindow.MoveCanvasLeft(X);
+                        } 
                     }
                 }
                 else if (direction == 2)
@@ -204,9 +220,14 @@ namespace Requital
                         X -= 1;
                         mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        
+                        if (mainWindow.Triggered)
+                        {
+                            X += 3;
+                            mainWindow.MoveCanvasLeft(X);
+                        } 
                     }
                 }
+                mainWindow.TryTriggerCombat();
                 if(!mainWindow.Triggered)
                 {
                     //mainWindow.MovementScreen.Debug.Content = mainWindow.Triggered; //REMOVE ---------------------------------------------
