@@ -7,8 +7,7 @@
         xmlns:uc="clr-namespace:TestUserControls.UserControls"
         mc:Ignorable="d"
         Title="Test UserControls" Width="1250" Height="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
-        <uc:CombatScreen x:Name="Combat" Visibility="Hidden" />
+    <Grid x:Name="MainGrid">
         <uc:CreationScreen x:Name="CreationS" Visibility="Hidden" IsVisibleChanged="CreationS_IsVisibleChanged"/>
         <uc:Menu x:Name="Menu" IsVisibleChanged="Menu_IsVisibleChanged"/>
         <!--<uc:CharacterStats/>-->
