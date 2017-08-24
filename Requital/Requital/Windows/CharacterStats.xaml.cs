@@ -21,10 +21,10 @@ namespace TestUserControls.UserControls
     {
         private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
         public List<Characters> charList { get; set; }
-        public CharacterStats()
+        public CharacterStats(List<Characters> statTeam)
         {
             InitializeComponent();
-            charList = new List<Characters>() { new Mage(), new Warrior(), new Cleric(), new Rogue()};
+            charList = statTeam;
             CharacterButtons();
             //ExitButton();
         }
@@ -53,7 +53,7 @@ namespace TestUserControls.UserControls
 
         private void CharacterButtons()
         {
-            for (int x = 0; x < charList.Count; x++)
+            for (int x = 0; x < 4; x++)
             {
                 Binding bind = new Binding("CharacterClass");
                 Image i = new Image();

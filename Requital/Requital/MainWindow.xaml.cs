@@ -112,6 +112,7 @@ namespace Requital
             movementLogic.disable = true;
             await Task.Delay(1600);
             MovementScreen.Visibility = Visibility.Hidden;
+            CS.Enemies = encounter.pickEncounter();
             CS.Visibility = Visibility.Visible;
         }
     }
