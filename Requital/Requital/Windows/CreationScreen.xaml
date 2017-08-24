@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestUserControls.UserControls"
              mc:Ignorable="d" 
-             xmlns:vc="clr-namespace:Requital.ValueConverters;assembly=Requital"
+             xmlns:vc="clr-namespace:Requital.ValueConverters"
              x:Name="CreationScreenControl">
     <Grid x:Name="MainGrid">
         <Grid.Resources>
