@@ -213,6 +213,9 @@
   <ItemGroup>
     <Resource Include="assets\Warrior.png" />
   </ItemGroup>
+ <ItemGroup>
+    <Resource Include="assets\ex.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\Maps\SandMap.png" />
   </ItemGroup>
