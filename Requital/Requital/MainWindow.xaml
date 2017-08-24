@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ms="clr-namespace:Requital.Windows"
-        xmlns:uc="clr-namespace:TestUserControls.UserControls"
+        xmlns:uc="tes"
         xmlns:local="clr-namespace:Requital"
         mc:Ignorable="d"
         Title="Requital"
