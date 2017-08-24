@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestUserControls.UserControls;
 
 namespace TestUserControls.UserControls
 {
@@ -22,19 +23,13 @@ namespace TestUserControls.UserControls
     public partial class CombatScreen : UserControl
     {
         private List<Characters> dreamTeam = new List<Characters>();
-        public List<Characters> CombatTeam
-        {
-            get { return dreamTeam; }
-            set
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    if (value.ElementAt(i).CharacterClass == "Cleric")
-                    {
+        public List<Characters> CombatTeam { get { return dreamTeam; }
+            set {
+                for (int i = 0; i < 4; i++) {
+                    if(value.ElementAt(i).CharacterClass == "Cleric") {
                         dreamTeam.Add(new Cleric(value.ElementAt(i).characterName));
                     }
-                    if (value.ElementAt(i).CharacterClass == "Mage")
-                    {
+                    if (value.ElementAt(i).CharacterClass == "Mage") {
                         dreamTeam.Add(new Mage(value.ElementAt(i).characterName));
                     }
                     if (value.ElementAt(i).CharacterClass == "Rogue")
@@ -50,21 +45,23 @@ namespace TestUserControls.UserControls
         }
         private List<Characters> enemies = new List<Characters>();
 
-        public List<Characters> Enemies
-        {
-            get { return enemies; }
+        public List<Characters> Enemies { get { return enemies; }
             set { enemies = value; }
         }
-
+        private CharacterStats cs;
         public CombatScreen(List<Characters> chars)
         {
             CombatTeam = chars;
+            cs = new CharacterStats(dreamTeam);
             InitializeComponent();
             if (CombatControl.Visibility == Visibility.Visible)
                 StartControl();
 
         }
+        public CombatScreen()
+        {
 
+        }
         private void StartControl()
         {
             HeroGrid();
@@ -128,8 +125,7 @@ namespace TestUserControls.UserControls
         }
         private void MonsterMiniStat(List<Characters> enemies)
         {
-            for (int i = 0; i < enemies.Count; i++)
-            {
+            for (int i = 0; i < enemies.Count; i++) {
                 Label l = new Label();
                 l.Content = $"{enemies.ElementAt(i).characterName} \nHp: {enemies.ElementAt(i).Health} Mp: {enemies.ElementAt(i).Mana}";
                 l.Width = 183.25;
@@ -144,8 +140,7 @@ namespace TestUserControls.UserControls
         private void CharMiniStat()
         {
 
-            for (int i = 0; i < 4; i++)
-            {
+            for (int i = 0; i < 4; i++) {
                 Label l = new Label();
                 Binding bind = new Binding("Health");
                 bind.Mode = BindingMode.OneWay;
@@ -189,9 +184,12 @@ namespace TestUserControls.UserControls
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
             pauseCounter++;
-            ; CharacterStats cs = new CharacterStats(dreamTeam);
+;           
+            Grid.SetRow(cs, 0);
+            Grid.SetColumn(cs, 0);
+            Grid.SetRowSpan(cs, 2);
+            Grid.SetColumnSpan(cs, 3);
             Options.Children.Add(cs);
-            cs.Visibility = Visibility.Hidden;
 
             if (pauseCounter == 1)
                 cs.Visibility = Visibility.Visible;
