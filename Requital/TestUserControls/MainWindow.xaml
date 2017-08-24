@@ -8,9 +8,10 @@
         mc:Ignorable="d"
         Title="Test UserControls" Width="1250" Height="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
+        <Image Source="/Requital;component/assets/Transition/Title.png" Stretch="UniformToFill"/>
         <uc:CombatScreen x:Name="Combat" Visibility="Hidden" />
         <uc:CreationScreen x:Name="CreationS" Visibility="Hidden" IsVisibleChanged="CreationS_IsVisibleChanged"/>
-        <uc:Menu x:Name="Menu" IsVisibleChanged="Menu_IsVisibleChanged"/>
+        <uc:Menu x:Name="Menu" IsVisibleChanged="Menu_IsVisibleChanged" />
         <!--<uc:CharacterStats/>-->
     </Grid>
 </Window>
