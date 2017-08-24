@@ -48,16 +48,20 @@ namespace TestUserControls.UserControls
         public List<Characters> Enemies { get { return enemies; }
             set { enemies = value; }
         }
-
+        private CharacterStats cs;
         public CombatScreen(List<Characters> chars)
         {
             CombatTeam = chars;
+            cs = new CharacterStats(dreamTeam);
             InitializeComponent();
             if (CombatControl.Visibility == Visibility.Visible)
                 StartControl();
 
         }
+        public CombatScreen()
+        {
 
+        }
         private void StartControl()
         {
             HeroGrid();
@@ -180,11 +184,14 @@ namespace TestUserControls.UserControls
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
             pauseCounter++;
-;           CharacterStats cs = new CharacterStats(dreamTeam);
+;           
+            Grid.SetRow(cs, 0);
+            Grid.SetColumn(cs, 0);
+            Grid.SetRowSpan(cs, 2);
+            Grid.SetColumnSpan(cs, 3);
             Options.Children.Add(cs);
-            cs.Visibility = Visibility.Hidden;
 
-            if(pauseCounter == 1)
+            if (pauseCounter == 1)
                 cs.Visibility = Visibility.Visible;
             else
             {
