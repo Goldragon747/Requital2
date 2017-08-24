@@ -8,7 +8,7 @@ namespace Requital
 {
     class SkeletonArcher: Characters
     {
-        public void skeletonArcher()
+        public SkeletonArcher()
         {
             base.CharacterClass = "Monster";
             base.characterName = "Skeleton Archer";

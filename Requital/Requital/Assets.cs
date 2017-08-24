@@ -46,7 +46,10 @@ namespace Requital
         public BitmapImage rouge_down_6 = new BitmapImage();
         public BitmapImage rouge_down_7 = new BitmapImage();
         public BitmapImage rouge_down_8 = new BitmapImage();
-        
+
+        //Title Image
+        public BitmapImage title = new BitmapImage();
+
         public void LoadImages()
         {
             ex.BeginInit();
@@ -192,6 +195,10 @@ namespace Requital
             rouge_up_8.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Rouge/moving_up/8.png");
             rouge_up_8.EndInit();
 
+            //Title Screen
+            title.BeginInit();
+            title.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Transition/Title.png");
+            title.EndInit();
         }
     }
 }
