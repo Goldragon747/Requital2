@@ -120,7 +120,22 @@ namespace TestUserControls.UserControls
             for (int i = 0; i < tempImg.Count; i++)
             {
                 Characters c = (Characters)tempImg.ElementAt(i).DataContext;
-                dreamTeam.Add(c);
+                if (c.CharacterClass == "Cleric")
+                {
+                    dreamTeam.Add(new Cleric());
+                }
+                if (c.CharacterClass == "Mage")
+                {
+                    dreamTeam.Add(new Mage());
+                }
+                if (c.CharacterClass == "Rogue")
+                {
+                    dreamTeam.Add(new Rogue());
+                }
+                if (c.CharacterClass == "Warrior")
+                {
+                    dreamTeam.Add(new Warrior());
+                }
             }
             MessageBox.Show($"Team is ready to slay");
            CreationScreenControl.Visibility = Visibility.Collapsed;
