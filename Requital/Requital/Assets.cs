@@ -9,8 +9,8 @@ namespace Requital
 {
     public class Assets
     {
+        public BitmapImage ex = new BitmapImage();
         // MAPS \\
-        //public BitmapImage rouge_left_1 = new BitmapImage();
         public BitmapImage cave = new BitmapImage();
 
         // ROUGE \\
@@ -49,6 +49,10 @@ namespace Requital
         
         public void LoadImages()
         {
+            ex.BeginInit();
+            ex.UriSource = new Uri("pack://application:,,,/Requital;component/assets/ex.png");
+            ex.EndInit();
+
             // MAPS \\
             cave.BeginInit();
             cave.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Maps/Cave.png");

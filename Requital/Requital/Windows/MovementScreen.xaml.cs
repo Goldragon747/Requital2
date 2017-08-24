@@ -26,6 +26,16 @@ namespace Requital.Windows
             get { return sprite.Source; }
             set { sprite.Source = value; }
         }
+        public ImageSource ExclamSource
+        {
+            get { return exclam.Source; }
+            set { exclam.Source = value; }
+        }
+        public Visibility ExclamVisibility
+        {
+            get { return exclam.Visibility; }
+            set { exclam.Visibility = value; }
+        }
         public ImageSource MovementBackground
         {
             get { return _image.Source; }

@@ -41,6 +41,7 @@ namespace Requital
         {
             MovementScreen.MovementBackground = assets.cave;
             MovementScreen.Sprite = assets.rouge_right_1;
+            MovementScreen.ExclamSource = assets.ex;
             MoveCanvasTop(movementLogic.Y);
             MoveCanvasLeft(movementLogic.X);
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
@@ -99,15 +100,18 @@ namespace Requital
         public void TryTriggerCombat()
         {
             Random ran = new Random();
-            if (ran.Next(200) == 55)
+            if ((ran.Next(120) == 55 && counter> 60000) || counter > 150000)
             {
-                //TriggerCombat();
+                counter = 0;
+                TriggerCombat();
             }
         }
-        public void TriggerCombat()
+        public async void TriggerCombat()
         {
+            MovementScreen.ExclamVisibility = Visibility.Visible;
+            movementLogic.disable = true;
+            await Task.Delay(1600);
             MovementScreen.Visibility = Visibility.Hidden;
-            //CS.Enemies = encounter.pickEncounter;
             CS.Visibility = Visibility.Visible;
         }
     }
