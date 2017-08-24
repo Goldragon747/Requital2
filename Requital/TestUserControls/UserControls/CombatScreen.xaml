@@ -62,7 +62,7 @@
             <WrapPanel x:Name="ViewMagic" Grid.Row="1"/>
         </Grid>
         
-        <local:CharacterStats x:Name="CharacterStats" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2"
-                              Grid.Column="0" Grid.ColumnSpan="3"/>
+        <!--<local:CharacterStats x:Name="CharacterStats" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2"
+                              Grid.Column="0" Grid.ColumnSpan="3"/>-->
     </Grid>
 </UserControl>

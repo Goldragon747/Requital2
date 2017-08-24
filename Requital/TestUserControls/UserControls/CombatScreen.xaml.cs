@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestUserControls.UserControls;
 
 namespace TestUserControls.UserControls
 {
@@ -179,11 +180,15 @@ namespace TestUserControls.UserControls
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
             pauseCounter++;
+;           CharacterStats cs = new CharacterStats(dreamTeam);
+            Options.Children.Add(cs);
+            cs.Visibility = Visibility.Hidden;
+
             if(pauseCounter == 1)
-                CharacterStats.Visibility = Visibility.Visible;
+                cs.Visibility = Visibility.Visible;
             else
             {
-                CharacterStats.Visibility = Visibility.Hidden;
+                cs.Visibility = Visibility.Hidden;
                 pauseCounter = 0;
             }
         }
