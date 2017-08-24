@@ -41,6 +41,7 @@ namespace Requital
         {
             MovementScreen.MovementBackground = assets.cave;
             MovementScreen.Sprite = assets.rouge_right_1;
+            MovementScreen.ExclamSource = assets.ex;
             MoveCanvasTop(movementLogic.Y);
             MoveCanvasLeft(movementLogic.X);
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
@@ -105,11 +106,13 @@ namespace Requital
                 TriggerCombat();
             }
         }
-        public void TriggerCombat()
+        public async void TriggerCombat()
         {
+            MovementScreen.ExclamVisibility = Visibility.Visible;
             movementLogic.disable = true;
-            //MovementScreen.Visibility = Visibility.Hidden;
-            //CS.Visibility = Visibility.Visible;
+            await Task.Delay(1600);
+            MovementScreen.Visibility = Visibility.Hidden;
+            CS.Visibility = Visibility.Visible;
         }
     }
 }
