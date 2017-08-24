@@ -22,6 +22,7 @@ namespace Requital
         public Assets assets;
         public Movement movementLogic;
         public Encounters encounter;
+        public List<Characters> dreamTeam;
         private bool triggered = false;
         int counter = 0;
         public bool Triggered { get => triggered; set => triggered = value; }
@@ -113,7 +114,18 @@ namespace Requital
             await Task.Delay(1600);
             MovementScreen.Visibility = Visibility.Hidden;
             CS.Enemies = encounter.pickEncounter();
+            CS.dreamTeam = dreamTeam;
+            CS.StartControl();
             CS.Visibility = Visibility.Visible;
+        }
+
+        private void CreateCharacters_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(CreateCharacters.Visibility == Visibility.Collapsed)
+            {
+                MovementScreen.Visibility = Visibility.Visible;
+                dreamTeam = CreateCharacters.DreamTeam;
+            }
         }
     }
 }

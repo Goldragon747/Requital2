@@ -123,7 +123,7 @@ namespace TestUserControls.UserControls
                 dreamTeam.Add(c);
             }
             MessageBox.Show($"Team is ready to slay");
-            CreationScreenControl.Visibility = Visibility.Collapsed;
+           CreationScreenControl.Visibility = Visibility.Collapsed;
         }
 
         private void DeleteHero_Click(object sender, RoutedEventArgs e)

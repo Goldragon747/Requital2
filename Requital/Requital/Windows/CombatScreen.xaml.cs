@@ -22,47 +22,47 @@ namespace TestUserControls.UserControls
     /// </summary>
     public partial class CombatScreen : UserControl
     {
-        private List<Characters> dreamTeam = new List<Characters>();
-        public List<Characters> CombatTeam { get { return dreamTeam; }
-            set {
-                for (int i = 0; i < 4; i++) {
-                    if(value.ElementAt(i).CharacterClass == "Cleric") {
-                        dreamTeam.Add(new Cleric(value.ElementAt(i).characterName));
-                    }
-                    if (value.ElementAt(i).CharacterClass == "Mage") {
-                        dreamTeam.Add(new Mage(value.ElementAt(i).characterName));
-                    }
-                    if (value.ElementAt(i).CharacterClass == "Rogue")
-                    {
-                        dreamTeam.Add(new Rogue(value.ElementAt(i).characterName));
-                    }
-                    if (value.ElementAt(i).CharacterClass == "Warrior")
-                    {
-                        dreamTeam.Add(new Warrior(value.ElementAt(i).characterName));
-                    }
-                }
-            }
-        }
+        public List<Characters> dreamTeam { get; set; }
+        //public List<Characters> CombatTeam { get { return dreamTeam; }
+        //    set {
+        //        for (int i = 0; i < 4; i++) {
+        //            if(value.ElementAt(i).CharacterClass == "Cleric") {
+        //                dreamTeam.Add(new Cleric(value.ElementAt(i).characterName));
+        //            }
+        //            if (value.ElementAt(i).CharacterClass == "Mage") {
+        //                dreamTeam.Add(new Mage(value.ElementAt(i).characterName));
+        //            }
+        //            if (value.ElementAt(i).CharacterClass == "Rogue")
+        //            {
+        //                dreamTeam.Add(new Rogue(value.ElementAt(i).characterName));
+        //            }
+        //            if (value.ElementAt(i).CharacterClass == "Warrior")
+        //            {
+        //                dreamTeam.Add(new Warrior(value.ElementAt(i).characterName));
+        //            }
+        //        }
+        //    }
+        //}
         private List<Characters> enemies = new List<Characters>();
 
         public List<Characters> Enemies { get { return enemies; }
             set { enemies = value; }
         }
         private CharacterStats cs;
-        public CombatScreen(List<Characters> chars)
-        {
-            CombatTeam = chars;
-            cs = new CharacterStats(dreamTeam);
-            InitializeComponent();
-            if (CombatControl.Visibility == Visibility.Visible)
-                StartControl();
+        //public CombatScreen(List<Characters> chars)
+        //{
+        //    CombatTeam = chars;
+        //    cs = new CharacterStats(dreamTeam);
+            
+        //    if (CombatControl.Visibility == Visibility.Visible)
+        //        StartControl();
 
-        }
+        //}
         public CombatScreen()
         {
-
+            InitializeComponent();
         }
-        private void StartControl()
+        public void StartControl()
         {
             HeroGrid();
             CharMiniStat();
@@ -144,9 +144,9 @@ namespace TestUserControls.UserControls
                 Label l = new Label();
                 Binding bind = new Binding("Health");
                 bind.Mode = BindingMode.OneWay;
-                l.DataContext = CombatTeam.ElementAt(i);
+                l.DataContext = dreamTeam.ElementAt(i);
 
-                l.Content = $"{CombatTeam.ElementAt(i).characterName} \nHp: {CombatTeam.ElementAt(i).Health} Mp: {CombatTeam.ElementAt(i).Mana}";
+                l.Content = $"{dreamTeam.ElementAt(i).characterName} \nHp: {dreamTeam.ElementAt(i).Health} Mp: {dreamTeam.ElementAt(i).Mana}";
                 l.Width = 206;
                 l.Height = 92;
                 l.BorderBrush = Brushes.Black;
@@ -163,7 +163,7 @@ namespace TestUserControls.UserControls
                 Button b = new Button();
                 b.Width = 50;
                 b.Height = 75;
-                b.Content = $"{CombatTeam.ElementAt(i).characterName}";
+                b.Content = $"{dreamTeam.ElementAt(i).characterName}";
                 b.Background = Brushes.Aqua;
                 CharacterGrid.Children.Add(b);
             }
