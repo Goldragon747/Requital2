@@ -99,16 +99,17 @@ namespace Requital
         public void TryTriggerCombat()
         {
             Random ran = new Random();
-            if (ran.Next(200) == 55)
+            if ((ran.Next(120) == 55 && counter> 60000) || counter > 150000)
             {
-                //TriggerCombat();
+                counter = 0;
+                TriggerCombat();
             }
         }
         public void TriggerCombat()
         {
-            MovementScreen.Visibility = Visibility.Hidden;
-            //CS.Enemies = encounter.pickEncounter;
-            CS.Visibility = Visibility.Visible;
+            movementLogic.disable = true;
+            //MovementScreen.Visibility = Visibility.Hidden;
+            //CS.Visibility = Visibility.Visible;
         }
     }
 }

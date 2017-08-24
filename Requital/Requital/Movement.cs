@@ -10,12 +10,12 @@ namespace Requital
 {
     public class Movement
     {
-        int direction = 1; // NORTH = 1 EAST = 2 SOUTH = 3 WEST = 4
+        public int direction = 1; // NORTH = 1 EAST = 2 SOUTH = 3 WEST = 4
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         System.Windows.Threading.DispatcherTimer movementTimer = new System.Windows.Threading.DispatcherTimer();
-        int tick = 0;
-
-        bool isMoving = false;
+        public int tick = 0;
+        public bool disable = false;
+        public bool isMoving = false;
 
         MainWindow mainWindow;
 
@@ -238,30 +238,33 @@ namespace Requital
         }
         public void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key.ToString() == "W")
+            if (!disable)
             {
-                isMoving = true;
-                direction = 1;
-            }
-            else if (e.Key.ToString() == "S")
-            {
-                isMoving = true;
-                direction = 3;
-            }
-            else if (e.Key.ToString() == "A")
-            {
-                isMoving = true;
-                direction = 4;
-            }
-            else if (e.Key.ToString() == "D")
-            {
-                isMoving = true;
-                direction = 2;
-            }
-            if (isMoving)
-            {
-                movementTimer.Start();
-                dispatcherTimer.Start();
+                if (e.Key.ToString() == "W")
+                {
+                    isMoving = true;
+                    direction = 1;
+                }
+                else if (e.Key.ToString() == "S")
+                {
+                    isMoving = true;
+                    direction = 3;
+                }
+                else if (e.Key.ToString() == "A")
+                {
+                    isMoving = true;
+                    direction = 4;
+                }
+                else if (e.Key.ToString() == "D")
+                {
+                    isMoving = true;
+                    direction = 2;
+                }
+                if (isMoving)
+                {
+                    movementTimer.Start();
+                    dispatcherTimer.Start();
+                }
             }
         }
         public void OnButtonKeyUp(object sender, KeyEventArgs e)
