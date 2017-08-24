@@ -226,5 +226,8 @@
     <Resource Include="assets\Transition\SandtoCaveTransition.png" />
     <Resource Include="assets\Transition\Townpicture.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Transition\Title.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

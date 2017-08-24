@@ -50,6 +50,18 @@ namespace Requital
         //Title Image
         public BitmapImage title = new BitmapImage();
 
+        //Dessert to Cave
+        public BitmapImage dToC = new BitmapImage();
+
+        // Desert to Town
+        public BitmapImage dToT = new BitmapImage();
+
+        // Cave Battle screen
+        public BitmapImage cave_battle = new BitmapImage();
+
+        //Desert battle screen
+        public BitmapImage desert_battle = new BitmapImage();
+
         public void LoadImages()
         {
             ex.BeginInit();
@@ -199,6 +211,26 @@ namespace Requital
             title.BeginInit();
             title.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Transition/Title.png");
             title.EndInit();
+
+            //Desert to Cave
+            dToC.BeginInit();
+            dToC.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Transition/SandtoCaveTransition.png");
+            dToC.EndInit();
+
+            // Desert to town
+            dToT.BeginInit();
+            dToT.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Transition/Townpicture.png");
+            dToT.EndInit();
+
+            //Cave Battle Screen
+            cave_battle.BeginInit();
+            cave_battle.UriSource = new Uri("pack://application:,,,/Requital;component/assets/BattleScreen/CaveBackground.jpg");
+            cave_battle.EndInit();
+
+            //Desert Battle Screen
+            desert_battle.BeginInit();
+            desert_battle.UriSource = new Uri("pack://application:,,,/Requital;component/assets/BattleScreen/DesertBackground.jpg");
+            desert_battle.EndInit();
         }
     }
 }
