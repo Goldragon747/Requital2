@@ -36,7 +36,7 @@ namespace Requital
                 kill(attacker, defender);
             }
         }
-        public void turnOrder(List<Characters> c)
+        public void turnOrder(List<Characters> enemyList, List<Characters> HeroList)
         {
             
         }

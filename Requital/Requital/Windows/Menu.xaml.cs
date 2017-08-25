@@ -20,6 +20,12 @@ namespace TestUserControls.UserControls
     /// </summary>
     public partial class Menu : UserControl
     {
+        public ImageSource MenuSource
+        {
+            get { return MenuImage.Source; }
+            set { MenuImage.Source = value; }
+        }
+
         public Menu()
         {
             InitializeComponent();

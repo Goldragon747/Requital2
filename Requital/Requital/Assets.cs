@@ -219,12 +219,12 @@ namespace Requital
 
             // Desert to town
             dToT.BeginInit();
-            dToT.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Transition/Townpicture.png");
+            dToT.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Transition/Townpicture.jpg");
             dToT.EndInit();
 
             //Cave Battle Screen
             cave_battle.BeginInit();
-            cave_battle.UriSource = new Uri("pack://application:,,,/Requital;component/assets/BattleScreen/CaveBackground.jpg");
+            cave_battle.UriSource = new Uri("pack://application:,,,/Requital;component/assets/BattleScreen/CaveBackground.jpg", UriKind.Absolute);
             cave_battle.EndInit();
 
             //Desert Battle Screen

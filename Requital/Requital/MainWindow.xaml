@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen" Width="1250" Height="650"
         x:Name="mainWindow">
     <Grid>
-        <uc:CreationScreen x:Name="CreateCharacters" Visibility="Visible" IsVisibleChanged="CreateCharacters_IsVisibleChanged"/>
+        <uc:Menu x:Name="Menu" Visibility="Visible" IsVisibleChanged="Menu_IsVisibleChanged"/>
+        <uc:CreationScreen x:Name="CreateCharacters" Visibility="Hidden" IsVisibleChanged="CreateCharacters_IsVisibleChanged"/>
         <ms:MovementScreen x:Name="MovementScreen" Visibility="Hidden"/>
         <uc:CombatScreen
             x:Name="CS"
