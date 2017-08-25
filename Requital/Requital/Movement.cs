@@ -11,26 +11,28 @@ namespace Requital
     public class Movement
     {
         public int direction = 1; // NORTH = 1 EAST = 2 SOUTH = 3 WEST = 4
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        System.Windows.Threading.DispatcherTimer movementTimer = new System.Windows.Threading.DispatcherTimer();
+        public System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        public System.Windows.Threading.DispatcherTimer movementTimer = new System.Windows.Threading.DispatcherTimer();
         public int tick = 0;
         public bool disable = false;
         public bool isMoving = false;
 
         MainWindow mainWindow;
 
-        private double x = -2750;
-        private double y = -4300;
+        private double x = 0;
+        private double y = 0;
 
         private int speed = 1;
 
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
 
-        public Movement(MainWindow window)
+        public Movement(MainWindow window,int xPos, int yPos)
         {
             mainWindow = window;
             SetTimer();
+            x = xPos;
+            y = yPos;
         }
 
         private void SetTimer()
@@ -44,124 +46,249 @@ namespace Requital
         {
             if (isMoving)
             {
-                if (direction == 1)
+                if (mainWindow.Cave.IsVisible)
                 {
-                    switch (tick)
+                    if (direction == 1)
                     {
-                        case 0:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_1;
-                            break;
-                        case 1:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_2;
-                            break;
-                        case 2:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_3;
-                            break;
-                        case 3:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_4;
-                            break;
-                        case 4:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_5;
-                            break;
-                        case 5:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_6;
-                            break;
-                        case 6:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_7;
-                            break;
-                        case 7:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_8;
-                            break;
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_1;
+                                break;
+                            case 1:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_2;
+                                break;
+                            case 2:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_3;
+                                break;
+                            case 3:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_4;
+                                break;
+                            case 4:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_5;
+                                break;
+                            case 5:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_6;
+                                break;
+                            case 6:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_7;
+                                break;
+                            case 7:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_8;
+                                break;
+                        }
                     }
-                }
-                else if (direction == 2)
-                {
-                    switch (tick)
+                    else if (direction == 2)
                     {
-                        case 0:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_1;
-                            break;
-                        case 1:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_2;
-                            break;
-                        case 2:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_3;
-                            break;
-                        case 3:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_4;
-                            break;
-                        case 4:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_5;
-                            break;
-                        case 5:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_6;
-                            break;
-                        case 6:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_7;
-                            break;
-                        case 7:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_8;
-                            break;
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_1;
+                                break;
+                            case 1:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_2;
+                                break;
+                            case 2:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_3;
+                                break;
+                            case 3:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_4;
+                                break;
+                            case 4:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_5;
+                                break;
+                            case 5:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_6;
+                                break;
+                            case 6:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_7;
+                                break;
+                            case 7:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_8;
+                                break;
+                        }
                     }
-                }
-                else if (direction == 3)
-                {
-                    switch (tick)
+                    else if (direction == 3)
                     {
-                        case 0:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_1;
-                            break;
-                        case 1:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_2;
-                            break;
-                        case 2:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_3;
-                            break;
-                        case 3:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_4;
-                            break;
-                        case 4:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_5;
-                            break;
-                        case 5:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_6;
-                            break;
-                        case 6:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_7;
-                            break;
-                        case 7:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_8;
-                            break;
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_1;
+                                break;
+                            case 1:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_2;
+                                break;
+                            case 2:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_3;
+                                break;
+                            case 3:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_4;
+                                break;
+                            case 4:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_5;
+                                break;
+                            case 5:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_6;
+                                break;
+                            case 6:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_7;
+                                break;
+                            case 7:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_8;
+                                break;
+                        }
                     }
-                }
-                else if (direction == 4)
-                {
-                    switch (tick)
+                    else if (direction == 4)
                     {
-                        case 0:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_1;
-                            break;
-                        case 1:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_2;
-                            break;
-                        case 2:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_3;
-                            break;
-                        case 3:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_4;
-                            break;
-                        case 4:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_5;
-                            break;
-                        case 5:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_6;
-                            break;
-                        case 6:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_7;
-                            break;
-                        case 7:
-                            mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_8;
-                            break;
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_1;
+                                break;
+                            case 1:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_2;
+                                break;
+                            case 2:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_3;
+                                break;
+                            case 3:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_4;
+                                break;
+                            case 4:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_5;
+                                break;
+                            case 5:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_6;
+                                break;
+                            case 6:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_7;
+                                break;
+                            case 7:
+                                mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_8;
+                                break;
+                        }
+                    }
+                } else if (mainWindow.Desert.IsVisible)
+                {
+                    if (direction == 1)
+                    {
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_1;
+                                break;
+                            case 1:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_2;
+                                break;
+                            case 2:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_3;
+                                break;
+                            case 3:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_4;
+                                break;
+                            case 4:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_5;
+                                break;
+                            case 5:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_6;
+                                break;
+                            case 6:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_7;
+                                break;
+                            case 7:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_8;
+                                break;
+                        }
+                    }
+                    else if (direction == 2)
+                    {
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_1;
+                                break;
+                            case 1:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_2;
+                                break;
+                            case 2:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_3;
+                                break;
+                            case 3:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_4;
+                                break;
+                            case 4:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_5;
+                                break;
+                            case 5:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_6;
+                                break;
+                            case 6:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_7;
+                                break;
+                            case 7:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_8;
+                                break;
+                        }
+                    }
+                    else if (direction == 3)
+                    {
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_1;
+                                break;
+                            case 1:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_2;
+                                break;
+                            case 2:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_3;
+                                break;
+                            case 3:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_4;
+                                break;
+                            case 4:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_5;
+                                break;
+                            case 5:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_6;
+                                break;
+                            case 6:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_7;
+                                break;
+                            case 7:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_8;
+                                break;
+                        }
+                    }
+                    else if (direction == 4)
+                    {
+                        switch (tick)
+                        {
+                            case 0:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_1;
+                                break;
+                            case 1:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_2;
+                                break;
+                            case 2:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_3;
+                                break;
+                            case 3:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_4;
+                                break;
+                            case 4:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_5;
+                                break;
+                            case 5:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_6;
+                                break;
+                            case 6:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_7;
+                                break;
+                            case 7:
+                                mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_8;
+                                break;
+                        }
                     }
                 }
             }
@@ -230,10 +357,6 @@ namespace Requital
                     }
                 }
                 mainWindow.TryTriggerCombat();
-                if(!mainWindow.Triggered)
-                {
-                    //mainWindow.MovementScreen.Debug.Content = mainWindow.Triggered; //REMOVE ---------------------------------------------
-                }
             }
         }
         public void OnButtonKeyDown(object sender, KeyEventArgs e)
@@ -289,21 +412,42 @@ namespace Requital
             {
                 movementTimer.Stop();
                 dispatcherTimer.Stop();
-                switch (direction)
+                if (mainWindow.Cave.IsVisible)
                 {
-                    case 1:
-                        mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_up_1;
-                        break;
-                    case 2:
-                        mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_right_1;
-                        break;
-                    case 3:
-                        mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_down_1;
-                        break;
-                    case 4:
-                        mainWindow.MovementScreen.Sprite = mainWindow.assets.rouge_left_1;
-                        break;
+                    switch (direction)
+                    {
+                        case 1:
+                            mainWindow.Cave.Sprite = mainWindow.assets.rouge_up_1;
+                            break;
+                        case 2:
+                            mainWindow.Cave.Sprite = mainWindow.assets.rouge_right_1;
+                            break;
+                        case 3:
+                            mainWindow.Cave.Sprite = mainWindow.assets.rouge_down_1;
+                            break;
+                        case 4:
+                            mainWindow.Cave.Sprite = mainWindow.assets.rouge_left_1;
+                            break;
+                    }
+                } else if (mainWindow.Desert.IsVisible)
+                {
+                    switch (direction)
+                    {
+                        case 1:
+                            mainWindow.Desert.Sprite = mainWindow.assets.rouge_up_1;
+                            break;
+                        case 2:
+                            mainWindow.Desert.Sprite = mainWindow.assets.rouge_right_1;
+                            break;
+                        case 3:
+                            mainWindow.Desert.Sprite = mainWindow.assets.rouge_down_1;
+                            break;
+                        case 4:
+                            mainWindow.Desert.Sprite = mainWindow.assets.rouge_left_1;
+                            break;
+                    }
                 }
+                
             }
         }
     }
