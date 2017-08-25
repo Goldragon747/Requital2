@@ -12,6 +12,8 @@ namespace Requital
         public BitmapImage ex = new BitmapImage();
         // MAPS \\
         public BitmapImage cave = new BitmapImage();
+        public BitmapImage desert = new BitmapImage();
+        public BitmapImage town = new BitmapImage();
 
         // ROUGE \\
         public BitmapImage rouge_left_1 = new BitmapImage();
@@ -73,6 +75,13 @@ namespace Requital
             cave.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Maps/Cave.png");
             cave.EndInit();
 
+            desert.BeginInit();
+            desert.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Maps/SandMap.png");
+            desert.EndInit();
+
+            town.BeginInit();
+            town.UriSource = new Uri("pack://application:,,,/Requital;component/assets/Maps/Town-Map.png");
+            town.EndInit();
             // ROUGE \\
 
             // left

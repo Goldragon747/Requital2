@@ -20,7 +20,8 @@ namespace Requital
     {
         
         public Assets assets;
-        public Movement movementLogic;
+        public Movement caveMovementLogic;
+        public Movement desertMovementLogic;
         public Encounters encounter;
         public List<Characters> dreamTeam;
         private bool triggered = false;
@@ -34,60 +35,86 @@ namespace Requital
             assets.LoadImages();
             Menu.MenuSource = assets.title;
             encounter = new Encounters();
-            movementLogic = new Movement(this);
+            caveMovementLogic = new Movement(this, -2750, -4300);
+            desertMovementLogic = new Movement(this, 0, 0);
             BuildCanvas();
-            HitBox hitboxes = new HitBox(MovementScreen.Map);
+            HitBox hitboxes = new HitBox(Cave.Map);
         }
         
         public void BuildCanvas()
         {
-            MovementScreen.MovementBackground = assets.cave;
-            MovementScreen.Sprite = assets.rouge_right_1;
-            MovementScreen.ExclamSource = assets.ex;
-            MoveCanvasTop(movementLogic.Y);
-            MoveCanvasLeft(movementLogic.X);
+            Cave.MovementBackground = assets.cave;
+            Cave.Sprite = assets.rouge_right_1;
+            Cave.ExclamSource = assets.ex;
+            Desert.MovementBackground = assets.desert;
+            Desert.Sprite = assets.rouge_right_1;
+            Desert.ExclamSource = assets.ex;
+            MoveCanvasTop(caveMovementLogic.Y); //--//
+            MoveCanvasLeft(caveMovementLogic.X);
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
             this.KeyUp += new KeyEventHandler(OnButtonKeyUp);
         }
         public void MoveCanvasTop(double x)
         {
-            Canvas.SetTop(MovementScreen.Map, x);
+            if (Cave.IsVisible)
+            {
+                Canvas.SetTop(Cave.Map, x);
+            } else if (Desert.IsVisible)
+            {
+                Canvas.SetTop(Desert.Map, x);
+            }
+
         }
         public void MoveCanvasLeft(double y)
         {
-            Canvas.SetLeft(MovementScreen.Map, y);
+            if (Cave.IsVisible)
+            {
+                Canvas.SetLeft(Cave.Map, y);
+            }
+            else if (Desert.IsVisible)
+            {
+                Canvas.SetLeft(Desert.Map, y);
+            }
         }
         private void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
-            if (MovementScreen.IsVisible)
+            if (Cave.IsVisible)
             {
-                movementLogic.OnButtonKeyDown(sender, e);
+                caveMovementLogic.OnButtonKeyDown(sender, e);
+            }
+            if (Desert.IsVisible)
+            {
+                desertMovementLogic.OnButtonKeyDown(sender, e);
             }
         }
         private void OnButtonKeyUp(object sender, KeyEventArgs e)
         {
-            if (MovementScreen.IsVisible)
+            if (Cave.IsVisible)
             {
-                movementLogic.OnButtonKeyUp(sender, e);
+                caveMovementLogic.OnButtonKeyUp(sender, e);
+            }
+            if (Desert.IsVisible)
+            {
+                desertMovementLogic.OnButtonKeyUp(sender, e);
             }
         }
 
         public bool HitDetection()
         {
             bool returnBool = false;
-            foreach (UIElement item in MovementScreen.Map.Children)
+            foreach (UIElement item in Cave.Map.Children)
             {
                 if (item is Rectangle)
                 {
                     Rectangle t = (Rectangle)item;
-                    double x1 = movementLogic.X - 570;
-                    double y1 = movementLogic.Y - 300;
+                    double x1 = caveMovementLogic.X - 570;
+                    double y1 = caveMovementLogic.Y - 300;
                     double leftBound = -(Canvas.GetLeft(t));
                     double rightBound = -(Canvas.GetLeft(t) + t.Width);
                     double topBound = -(Canvas.GetTop(t));
                     double bottomBound = -(Canvas.GetTop(t) + t.Height);
                     counter++;
-                    MovementScreen.Debug.Content = $"{counter} : x1 {x1} : y1 {y1} : { triggered } left {leftBound} : right {rightBound} : bottom {bottomBound} : top {topBound} ";
+                    Cave.Debug.Content = $"{counter} : x1 {x1} : y1 {y1} : { triggered } left {leftBound} : right {rightBound} : bottom {bottomBound} : top {topBound} ";
                     if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
                         (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
                         (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
@@ -110,10 +137,16 @@ namespace Requital
         }
         public async void TriggerCombat()
         {
-            MovementScreen.ExclamVisibility = Visibility.Visible;
-            movementLogic.disable = true;
+            //Cave.ExclamVisibility = Visibility.Visible;
+            Desert.ExclamVisibility = Visibility.Visible;
+            desertMovementLogic.disable = true;
+            //caveMovementLogic.disable = true;
+            desertMovementLogic.isMoving = false;
+            desertMovementLogic.movementTimer.Stop();
+            desertMovementLogic.dispatcherTimer.Stop();
             await Task.Delay(1600);
-            MovementScreen.Visibility = Visibility.Hidden;
+            //Cave.Visibility = Visibility.Hidden;
+            Desert.Visibility = Visibility.Hidden;
             CS.Enemies = encounter.pickEncounter();
             CS.dreamTeam = dreamTeam;
             CS.StartControl();
@@ -124,7 +157,8 @@ namespace Requital
         {
             if(CreateCharacters.Visibility == Visibility.Collapsed)
             {
-                MovementScreen.Visibility = Visibility.Visible;
+                //Cave.Visibility = Visibility.Visible;
+                Desert.Visibility = Visibility.Visible;
                 dreamTeam = CreateCharacters.DreamTeam;
             }
         }
