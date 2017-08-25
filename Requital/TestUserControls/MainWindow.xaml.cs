@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Requital.Windows;
 
 namespace TestUserControls
 {
@@ -35,7 +36,12 @@ namespace TestUserControls
         private void CreationS_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (CreationS.Visibility == Visibility.Collapsed)
-                Combat.Visibility = Visibility.Visible;
+            {
+                CombatScreen cs = new CombatScreen(CreationS.DreamTeam);
+                cs.Visibility = Visibility.Visible;
+                MainGrid.Children.Add(cs);
+            }
         }
+
     }
 }

@@ -120,10 +120,25 @@ namespace TestUserControls.UserControls
             for (int i = 0; i < tempImg.Count; i++)
             {
                 Characters c = (Characters)tempImg.ElementAt(i).DataContext;
-                dreamTeam.Add(c);
+                if (c.CharacterClass == "Cleric")
+                {
+                    dreamTeam.Add(new Cleric(c.characterName));
+                }
+                if (c.CharacterClass == "Mage")
+                {
+                    dreamTeam.Add(new Mage(c.characterName));
+                }
+                if (c.CharacterClass == "Rogue")
+                {
+                    dreamTeam.Add(new Rogue(c.characterName));
+                }
+                if (c.CharacterClass == "Warrior")
+                {
+                    dreamTeam.Add(new Warrior(c.characterName));
+                }
             }
             MessageBox.Show($"Team is ready to slay");
-            CreationScreenControl.Visibility = Visibility.Collapsed;
+           CreationScreenControl.Visibility = Visibility.Collapsed;
         }
 
         private void DeleteHero_Click(object sender, RoutedEventArgs e)

@@ -8,7 +8,7 @@ namespace Requital
 {
     class Goblin : Characters
     {
-        public void goblin()
+        public Goblin()
         {
             base.CharacterClass = "Monster";
             base.characterName = "Goblin";

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestUserControls.UserControls;
 
 namespace TestUserControls.UserControls
 {
@@ -21,13 +22,48 @@ namespace TestUserControls.UserControls
     /// </summary>
     public partial class CombatScreen : UserControl
     {
-        private List<Characters> dreamTeam = new List<Characters>();
-        public List<Characters> DreamTeam { get { return dreamTeam; } set { dreamTeam = value; } }
-        public int Enemies { get; set; } = 9;
+        public List<Characters> dreamTeam { get; set; }
+        //public List<Characters> CombatTeam { get { return dreamTeam; }
+        //    set {
+        //        for (int i = 0; i < 4; i++) {
+        //            if(value.ElementAt(i).CharacterClass == "Cleric") {
+        //                dreamTeam.Add(new Cleric(value.ElementAt(i).characterName));
+        //            }
+        //            if (value.ElementAt(i).CharacterClass == "Mage") {
+        //                dreamTeam.Add(new Mage(value.ElementAt(i).characterName));
+        //            }
+        //            if (value.ElementAt(i).CharacterClass == "Rogue")
+        //            {
+        //                dreamTeam.Add(new Rogue(value.ElementAt(i).characterName));
+        //            }
+        //            if (value.ElementAt(i).CharacterClass == "Warrior")
+        //            {
+        //                dreamTeam.Add(new Warrior(value.ElementAt(i).characterName));
+        //            }
+        //        }
+        //    }
+        //}
+        private List<Characters> enemies = new List<Characters>();
+
+        public List<Characters> Enemies { get { return enemies; }
+            set { enemies = value; }
+        }
+        private CharacterStats cs;
+        //public CombatScreen(List<Characters> chars)
+        //{
+        //    CombatTeam = chars;
+        //    cs = new CharacterStats(dreamTeam);
+            
+        //    if (CombatControl.Visibility == Visibility.Visible)
+        //        StartControl();
+
+        //}
         public CombatScreen()
         {
             InitializeComponent();
-
+        }
+        public void StartControl()
+        {
             HeroGrid();
             CharMiniStat();
             EnemyGrid(Enemies);
@@ -37,8 +73,8 @@ namespace TestUserControls.UserControls
             MagicB_Description("Firaga", 10);
             MagicB_Description("Stonedaga", 10);
             MagicB_Description("Thundaga", 10);
-
         }
+
         public SolidColorBrush brush1 = new SolidColorBrush();
 
 
@@ -87,12 +123,11 @@ namespace TestUserControls.UserControls
             b.BorderThickness = new Thickness(1);
             ViewMagic.Children.Add(b);
         }
-        private void MonsterMiniStat(int monsterAmount)
+        private void MonsterMiniStat(List<Characters> enemies)
         {
-            for (int i = 0; i < monsterAmount; i++) {
+            for (int i = 0; i < enemies.Count; i++) {
                 Label l = new Label();
-                //l.Background = Brushes.OldLace;
-                l.Content = $"Monster{i} Hp: 0 Mp: 0";
+                l.Content = $"{enemies.ElementAt(i).characterName} \nHp: {enemies.ElementAt(i).Health} Mp: {enemies.ElementAt(i).Mana}";
                 l.Width = 183.25;
                 l.Height = 61.25;
                 l.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -104,10 +139,14 @@ namespace TestUserControls.UserControls
         }
         private void CharMiniStat()
         {
+
             for (int i = 0; i < 4; i++) {
                 Label l = new Label();
-                //l.Background = Brushes.OldLace;
-                l.Content = $"Char{i} Hp: 0 Mp: 0";
+                Binding bind = new Binding("Health");
+                bind.Mode = BindingMode.OneWay;
+                l.DataContext = dreamTeam.ElementAt(i);
+
+                l.Content = $"{dreamTeam.ElementAt(i).characterName} \nHp: {dreamTeam.ElementAt(i).Health} Mp: {dreamTeam.ElementAt(i).Mana}";
                 l.Width = 206;
                 l.Height = 92;
                 l.BorderBrush = Brushes.Black;
@@ -124,19 +163,19 @@ namespace TestUserControls.UserControls
                 Button b = new Button();
                 b.Width = 50;
                 b.Height = 75;
-                b.Content = $"{DreamTeam.ElementAt(i).characterName}";
+                b.Content = $"{dreamTeam.ElementAt(i).characterName}";
                 b.Background = Brushes.Aqua;
                 CharacterGrid.Children.Add(b);
             }
         }
-        private void EnemyGrid(int enemies)
+        private void EnemyGrid(List<Characters> enemies)
         {
-            for (int i = 0; i < enemies; i++)
+            for (int i = 0; i < enemies.Count; i++)
             {
                 Button b = new Button();
                 b.Width = 50;
                 b.Height = 75;
-                b.Content = $"Enemy\n{i}";
+                b.Content = $"{enemies.ElementAt(i).characterName}";
                 b.Background = Brushes.Crimson;
                 MonsterGrid.Children.Add(b);
             }
@@ -145,11 +184,18 @@ namespace TestUserControls.UserControls
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
             pauseCounter++;
-            if(pauseCounter == 1)
-                CharacterStats.Visibility = Visibility.Visible;
+;           
+            Grid.SetRow(cs, 0);
+            Grid.SetColumn(cs, 0);
+            Grid.SetRowSpan(cs, 2);
+            Grid.SetColumnSpan(cs, 3);
+            Options.Children.Add(cs);
+
+            if (pauseCounter == 1)
+                cs.Visibility = Visibility.Visible;
             else
             {
-                CharacterStats.Visibility = Visibility.Hidden;
+                cs.Visibility = Visibility.Hidden;
                 pauseCounter = 0;
             }
         }

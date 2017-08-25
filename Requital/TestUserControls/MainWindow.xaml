@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestUserControls"
-        xmlns:uc="clr-namespace:TestUserControls.UserControls"
         mc:Ignorable="d"
         Title="Test UserControls" Width="1250" Height="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <uc:CombatScreen x:Name="Combat" Visibility="Hidden" />
+        
         <uc:CreationScreen x:Name="CreationS" Visibility="Hidden" IsVisibleChanged="CreationS_IsVisibleChanged"/>
-        <uc:Menu x:Name="Menu" IsVisibleChanged="Menu_IsVisibleChanged"/>
+        <uc:Menu x:Name="Menu" IsVisibleChanged="Menu_IsVisibleChanged" />
         <!--<uc:CharacterStats/>-->
     </Grid>
 </Window>

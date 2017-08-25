@@ -10,17 +10,19 @@ namespace Requital
 {
     public class Movement
     {
-        int direction = 1; // NORTH = 1 EAST = 2 SOUTH = 3 WEST = 4
+        public int direction = 1; // NORTH = 1 EAST = 2 SOUTH = 3 WEST = 4
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
         System.Windows.Threading.DispatcherTimer movementTimer = new System.Windows.Threading.DispatcherTimer();
-        int tick = 0;
-
-        bool isMoving = false;
+        public int tick = 0;
+        public bool disable = false;
+        public bool isMoving = false;
 
         MainWindow mainWindow;
 
-        private double x = 0;
-        private double y = 0;
+        private double x = -2750;
+        private double y = -4300;
+
+        private int speed = 1;
 
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
@@ -174,16 +176,14 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
+                        Y += speed;
+                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            Y += 1;
+                            Y -= 3;
                             mainWindow.MoveCanvasTop(Y);
-                        } else
-                        {
-                            Y -= 5;
-                            mainWindow.MoveCanvasTop(Y);
-                        }
+                        } 
                         
                     }
                 }
@@ -191,48 +191,42 @@ namespace Requital
                 {
                     for (int i = 0; i < 16; i++)
                     {
+                        Y -= speed;
+                        mainWindow.MoveCanvasTop(Y);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            Y -= 1;
+                            Y += 3;
                             mainWindow.MoveCanvasTop(Y);
-                        }  else
-                        {
-                            Y += 5;
-                            mainWindow.MoveCanvasTop(Y);
-                        }
+                        } 
                     }
                 }
                 else if (direction == 4)
                 {
                     for (int i = 0; i < 19; i++)
                     {
+                        X += speed;
+                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            X += 1;
+                            X -= 3;
                             mainWindow.MoveCanvasLeft(X);
-                        } else
-                        {
-                            X -= 5;
-                            mainWindow.MoveCanvasLeft(X);
-                        }
+                        } 
                     }
                 }
                 else if (direction == 2)
                 {
                     for (int i = 0; i < 19; i++)
                     {
+                        X -= speed;
+                        mainWindow.MoveCanvasLeft(X);
                         mainWindow.Triggered = mainWindow.HitDetection();
-                        if (!mainWindow.Triggered)
+                        if (mainWindow.Triggered)
                         {
-                            X -= 1;
+                            X += 3;
                             mainWindow.MoveCanvasLeft(X);
-                        } else
-                        {
-                            X += 5;
-                            mainWindow.MoveCanvasLeft(X);
-                        }
+                        } 
                     }
                 }
                 mainWindow.TryTriggerCombat();
@@ -244,30 +238,33 @@ namespace Requital
         }
         public void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key.ToString() == "W")
+            if (!disable)
             {
-                isMoving = true;
-                direction = 1;
-            }
-            else if (e.Key.ToString() == "S")
-            {
-                isMoving = true;
-                direction = 3;
-            }
-            else if (e.Key.ToString() == "A")
-            {
-                isMoving = true;
-                direction = 4;
-            }
-            else if (e.Key.ToString() == "D")
-            {
-                isMoving = true;
-                direction = 2;
-            }
-            if (isMoving)
-            {
-                movementTimer.Start();
-                dispatcherTimer.Start();
+                if (e.Key.ToString() == "W")
+                {
+                    isMoving = true;
+                    direction = 1;
+                }
+                else if (e.Key.ToString() == "S")
+                {
+                    isMoving = true;
+                    direction = 3;
+                }
+                else if (e.Key.ToString() == "A")
+                {
+                    isMoving = true;
+                    direction = 4;
+                }
+                else if (e.Key.ToString() == "D")
+                {
+                    isMoving = true;
+                    direction = 2;
+                }
+                if (isMoving)
+                {
+                    movementTimer.Start();
+                    dispatcherTimer.Start();
+                }
             }
         }
         public void OnButtonKeyUp(object sender, KeyEventArgs e)

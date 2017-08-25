@@ -18,6 +18,15 @@
                    VerticalAlignment="Center"
                    Canvas.Top="300"
                    Canvas.Left="570"/>
+            <Image x:Name="exclam"
+                   Width="100"
+                   Height="100"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Canvas.Top="200"
+                   Canvas.Left="550"
+                   Visibility="Hidden"/>
+
             <Label x:Name="Debug"
                    Width="400"
                    Height="30"
