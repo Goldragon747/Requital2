@@ -56,7 +56,7 @@ namespace TestUserControls.UserControls
         }
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show($"{DreamTeam.Count}");
         }
 
         private void Defend_Click(object sender, RoutedEventArgs e)
