@@ -44,14 +44,17 @@ namespace Requital
             }
             else if (ranEncounter >= 71 && ranEncounter < 81)
             {
-                powerOverwhelming();
+                encounter = wimpyEncounter();
+                //powerOverwhelming();
             }
             else if (ranEncounter >= 81 && ranEncounter < 91)
             {
-                encounter = Mirror();
+                encounter = wimpyEncounter();
+                //encounter = Mirror();
             }
             else
             {
+                encounter = wimpyEncounter();
                 //encounter = encounter10();
             }
             return encounter;

@@ -32,6 +32,7 @@ namespace Requital
             InitializeComponent();
             assets = new Assets();
             assets.LoadImages();
+            Menu.MenuSource = assets.title;
             encounter = new Encounters();
             movementLogic = new Movement(this);
             BuildCanvas();
@@ -126,6 +127,12 @@ namespace Requital
                 MovementScreen.Visibility = Visibility.Visible;
                 dreamTeam = CreateCharacters.DreamTeam;
             }
+        }
+
+        private void Menu_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Menu.Visibility == Visibility.Hidden)
+                CreateCharacters.Visibility = Visibility.Visible;
         }
     }
 }

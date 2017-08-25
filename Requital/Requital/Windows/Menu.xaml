@@ -7,11 +7,10 @@
              mc:Ignorable="d" 
              x:Name="MenuControl">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1" Background="AliceBlue">
+        <Image x:Name="MenuImage" Stretch="Fill"/>
+        <Grid>
+        
+        <StackPanel Margin="0 150 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Button.Background" Value="AliceBlue"/>
@@ -21,9 +20,9 @@
                     <Setter Property="Button.FontSize" Value="18"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Start" Margin="0 200 0 25" Click="Start_Click"/>
-            <Button Content="Help" Margin="0 25 0 25" Click="Help_Click"/>
-            <Button Content="Credits" Margin="0 25 0 0" Click="Credits_Click"/>
+            <Button Content="Start" Margin="25" Click="Start_Click"/>
+            <Button Content="Help" Margin="25" Click="Help_Click"/>
+            <Button Content="Credits" Margin="25" Click="Credits_Click"/>
         </StackPanel>
         <StackPanel x:Name="HelpLabel" Visibility="Hidden" Background="CadetBlue">
             <Label Content="help" FontSize="36" HorizontalContentAlignment="Center"/>
@@ -31,5 +30,6 @@
         <StackPanel x:Name="CreditsLabel" Visibility="Hidden" Background="Aquamarine">
             <Label Content="credits" FontSize="36" HorizontalContentAlignment="Center"/>
         </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
