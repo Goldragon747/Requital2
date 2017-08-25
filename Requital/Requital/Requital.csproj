@@ -231,6 +231,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\BattleScreen\CaveBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="assets\BattleScreen\DesertBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
