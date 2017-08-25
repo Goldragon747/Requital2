@@ -229,5 +229,9 @@
   <ItemGroup>
     <Resource Include="assets\Transition\Title.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\BattleScreen\CaveBackground.jpg" />
+    <Resource Include="assets\BattleScreen\DesertBackground.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
