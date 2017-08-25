@@ -1,4 +1,5 @@
 ﻿using Requital;
+using Requital.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,15 +50,6 @@ namespace TestUserControls.UserControls
             set { enemies = value; }
         }
         private CharacterStats cs;
-        //public CombatScreen(List<Characters> chars)
-        //{
-        //    CombatTeam = chars;
-        //    cs = new CharacterStats(dreamTeam);
-            
-        //    if (CombatControl.Visibility == Visibility.Visible)
-        //        StartControl();
-
-        //}
         public CombatScreen()
         {
             InitializeComponent();
@@ -68,10 +60,13 @@ namespace TestUserControls.UserControls
             CharMiniStat();
             EnemyGrid(Enemies);
             MonsterMiniStat(Enemies);
-
-            MagicB_Description("Slash", 2);
-            MagicB_Description("Firaga", 10);
-            MagicB_Description("Stonedaga", 10);
+            cs = new CharacterStats(dreamTeam);
+            Heal heal = new Heal();
+            FireBall fb = new FireBall();
+            Revive r = new Revive();
+            MagicB_Description(heal.Name, heal.ManaCost);
+            MagicB_Description(fb.Name, fb.ManaCost);
+            MagicB_Description(r.Name, r.ManaCost);
             MagicB_Description("Thundaga", 10);
         }
 
@@ -102,7 +97,7 @@ namespace TestUserControls.UserControls
 
         private void Flee_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -184,7 +179,7 @@ namespace TestUserControls.UserControls
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
             pauseCounter++;
-;           
+;
             Grid.SetRow(cs, 0);
             Grid.SetColumn(cs, 0);
             Grid.SetRowSpan(cs, 2);
@@ -193,7 +188,8 @@ namespace TestUserControls.UserControls
 
             if (pauseCounter == 1)
                 cs.Visibility = Visibility.Visible;
-            else
+
+            else if (pauseCounter == 2)
             {
                 cs.Visibility = Visibility.Hidden;
                 pauseCounter = 0;

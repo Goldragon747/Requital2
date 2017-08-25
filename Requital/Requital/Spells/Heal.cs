@@ -8,7 +8,7 @@ namespace Requital.Spells
 {
     public class Heal: Spells
     {
-        public void healSpell()
+        public Heal()
         {
             base.Damage = 0;
             base.Healing = 5;

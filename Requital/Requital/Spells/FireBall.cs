@@ -8,7 +8,7 @@ namespace Requital.Spells
 {
     public class FireBall : Spells
     {
-        public void FireBallSpell()
+        public FireBall()
         {
             base.Damage = 5;
             base.Healing = 0;

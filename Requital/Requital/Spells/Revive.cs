@@ -8,7 +8,7 @@ namespace Requital.Spells
 {
     public class Revive : Spells
     {
-        public void revival()
+        public Revive()
         {
             base.Healing = 1;
             base.ManaCost = 100;
