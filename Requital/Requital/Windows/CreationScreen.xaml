@@ -38,7 +38,7 @@
             <!--ComboBox-->
             <WrapPanel HorizontalAlignment="Center" Margin="0 15 0 0">
                 <Button x:Name="PrevButton" Content="Prev" Click="Prev_Click" Height="25" Width="50" FontWeight="DemiBold"/>
-                <ComboBox x:Name="ItemsComboBox" FontWeight="DemiBold" Height="25"/>
+                <ComboBox x:Name="ItemsComboBox" FontWeight="DemiBold" Height="25" SelectionChanged="ItemsComboBox_SelectionChanged"/>
                 <Button x:Name="NextButton" Content="Next" Click="Next_Click" Height="25" Width="50" FontWeight="DemiBold"/>
             </WrapPanel>
             <!--Username-->

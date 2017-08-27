@@ -165,5 +165,19 @@ namespace TestUserControls.UserControls
             if (ItemsComboBox.SelectedIndex != 3)
                 ItemsComboBox.SelectedIndex = ItemsComboBox.SelectedIndex + 1;
         }
+
+
+        private void ItemsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = (ComboBox)sender;
+            Characters p = new Characters();
+            p.CharacterClass = cb.SelectedItem.ToString();
+
+            for (int i = 0; i < charList.Count; i++)
+            {
+                if (charList.ElementAt(i).CharacterClass == p.CharacterClass)
+                    StatsPanel.DataContext = charList.ElementAt(i);
+            }
+        }
     }
 }
