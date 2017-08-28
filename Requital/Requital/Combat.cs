@@ -10,8 +10,8 @@ namespace Requital
     public class Combat
     {
         
-        Characters c2 = new Characters();
-        Characters c1 = new Characters();
+        //Characters c2 = new Characters();
+        //Characters c1 = new Characters();
         LevelUp lvl = new LevelUp();
         //TODO- once we set up the buttons we will have to change what is being passed in to what they actually are
         //Since the child classes have the same parameters I'm pretty sure Characters works no matter who is passed in

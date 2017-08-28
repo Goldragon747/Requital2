@@ -9,7 +9,7 @@ namespace Requital
    
     public class LevelUp
     {
-        Combat c = new Combat();
+        //Combat c = new Combat();
         public void pickClass(Characters Leveler)
         {
             if(Leveler.CharacterClass == "Mage")
@@ -39,7 +39,7 @@ namespace Requital
             }
             else
             {
-                c.loadDialogue("Doom is upon you, your enemy has leveled up!");
+                //c.loadDialogue("Doom is upon you, your enemy has leveled up!");
             }
             
         }
@@ -52,7 +52,7 @@ namespace Requital
             Leveler.PhysicalDefense += pDefenseGain;
             Leveler.MagicDefense += mDefenseGain;
             Leveler.Mana += manaGain;
-            c.loadDialogue(Leveler.Name + " has leveled up!");
+            //c.loadDialogue(Leveler.Name + " has leveled up!");
         } 
     }
 }

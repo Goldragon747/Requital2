@@ -50,10 +50,15 @@ namespace TestUserControls.UserControls
             set { enemies = value; }
         }
         private CharacterStats cs;
+        public SolidColorBrush brush1 = new SolidColorBrush();
+        List<Characters> turnList = new List<Characters>();
+        Combat combat = new Combat();
+
         public CombatScreen()
         {
             InitializeComponent();
         }
+
         public void StartControl()
         {
             HeroGrid();
@@ -68,10 +73,22 @@ namespace TestUserControls.UserControls
             MagicB_Description(fb.Name, fb.ManaCost);
             MagicB_Description(r.Name, r.ManaCost);
             MagicB_Description("Thundaga", 10);
+
+            for (int i = 0; i < 4; i++) turnList.Add(dreamTeam.ElementAt(i)); 
+            for (int i = 0; i < enemies.Count; i++) turnList.Add(enemies.ElementAt(i));
         }
 
-        public SolidColorBrush brush1 = new SolidColorBrush();
+        int turnCounter = 0;
 
+        private void EnemyAttack()
+        {
+            Random r = new Random();
+            int index = r.Next(4);
+
+            combat.physicalAttack(turnList.ElementAt(turnCounter), dreamTeam.ElementAt(index));
+            if (turnCounter == turnList.Count - 1)
+                turnCounter = 0;
+        }
 
         private void Magic_Click(object sender, RoutedEventArgs e)
         {
@@ -87,12 +104,24 @@ namespace TestUserControls.UserControls
         }
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
-
+            for (int i = 0; i < enemies.Count; i++) {
+                if (enemies.ElementAt(i).Background == Brushes.LightPink) {
+                    MessageBox.Show($"{turnList.ElementAt(turnCounter)}");
+                    combat.physicalAttack(turnList.ElementAt(turnCounter), enemies.ElementAt(i));
+                }
+            }
+            turnCounter++;
+            if (turnCounter > 3)
+                EnemyAttack();
         }
 
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show($"{turnList.ElementAt(turnCounter)}");
 
+            turnCounter++;
+            if (turnCounter > 3)
+                EnemyAttack();
         }
 
         private void Flee_Click(object sender, RoutedEventArgs e)
@@ -156,10 +185,15 @@ namespace TestUserControls.UserControls
             for (int i = 0; i < dreamTeam.Count; i++)
             {
                 Button b = new Button();
+                Binding bind = new Binding("Health");
+                bind.Mode = BindingMode.TwoWay;
+                b.DataContext = dreamTeam.ElementAt(i);
+                b.SetBinding(ContentProperty, bind);
+
                 b.Width = 50;
                 b.Height = 75;
-                b.Content = $"{dreamTeam.ElementAt(i).characterName}";
                 b.Background = Brushes.Aqua;
+
                 CharacterGrid.Children.Add(b);
             }
         }
@@ -168,13 +202,32 @@ namespace TestUserControls.UserControls
             for (int i = 0; i < enemies.Count; i++)
             {
                 Button b = new Button();
+                Binding bind = new Binding("Health");
+                bind.Mode = BindingMode.TwoWay;
+                b.DataContext = enemies.ElementAt(i);
+                b.SetBinding(ContentProperty, bind);
+
                 b.Width = 50;
                 b.Height = 75;
-                b.Content = $"{enemies.ElementAt(i).characterName}";
                 b.Background = Brushes.Crimson;
+                b.Click += SelectedEnemy;
                 MonsterGrid.Children.Add(b);
             }
         }
+
+        private void SelectedEnemy(object sender, RoutedEventArgs e)
+        {
+            Button en = (Button)sender;
+            Characters enemy = (Characters)en.DataContext;
+
+            for (int i = 0; i < enemies.Count; i++) {
+                if (enemy == enemies.ElementAt(i))
+                    enemy.Background = Brushes.LightPink;
+                else
+                    enemies.ElementAt(i).Background = Brushes.Crimson;
+            }
+        }
+
         int pauseCounter = 0;
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {

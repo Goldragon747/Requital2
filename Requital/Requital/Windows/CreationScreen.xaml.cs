@@ -137,7 +137,7 @@ namespace TestUserControls.UserControls
                     dreamTeam.Add(new Warrior(c.characterName));
                 }
             }
-            MessageBox.Show($"Team is ready to slay");
+            //MessageBox.Show($"Team is ready to slay");
            CreationScreenControl.Visibility = Visibility.Collapsed;
         }
 
