@@ -26,10 +26,14 @@
         </StackPanel>
         <StackPanel x:Name="HelpLabel" Visibility="Hidden" Background="CadetBlue">
             <Label Content="help" FontSize="36" HorizontalContentAlignment="Center"/>
-        </StackPanel>
+                <Label x:Name="HelpInformationLabel" HorizontalContentAlignment="Center"/>
+                <Button x:Name="BackHelp" Content="Back" Click="Back_Click"/>
+            </StackPanel>
         <StackPanel x:Name="CreditsLabel" Visibility="Hidden" Background="Aquamarine">
             <Label Content="credits" FontSize="36" HorizontalContentAlignment="Center"/>
-        </StackPanel>
+                <Label x:Name="CreditInformationLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Button x:Name="BackCredits" Content="Back" Click="Back_Click"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
