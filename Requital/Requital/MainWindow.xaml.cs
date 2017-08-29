@@ -38,7 +38,7 @@ namespace Requital
             caveMovementLogic = new Movement(this, -2750, -4300);
             desertMovementLogic = new Movement(this, 0, 0);
             BuildCanvas();
-            HitBox hitboxes = new HitBox(Cave.Map);
+            HitBox hitboxes = new HitBox(Cave.Map,Desert.Map);
         }
         
         public void BuildCanvas()

@@ -69,9 +69,8 @@ namespace TestUserControls.UserControls
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
-            MenuControl.Visibility = Visibility.Visible;
-            
+            HelpLabel.Visibility = Visibility.Hidden;
+            CreditsLabel.Visibility = Visibility.Hidden;
         }
     }
 }
