@@ -26,9 +26,7 @@ namespace Requital
         private bool hasDefended = false;
         private int maxHealth;
         private bool isDead;
-        private bool turnActive = false;
 
-        public bool TurnActive { get { return turnActive; } set { turnActive = value; FieldChanged(); } }
         public bool IsDead { get { return isDead; } set { isDead = value; FieldChanged(); } }
             public int MaxHealth{ get { return maxHealth; } set { maxHealth = value; FieldChanged(); } }
             public bool HasDefended { get { return hasDefended; } set { hasDefended = value; FieldChanged(); } }

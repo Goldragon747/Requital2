@@ -83,11 +83,15 @@ namespace TestUserControls.UserControls
         private void EnemyAttack()
         {
             Random r = new Random();
-            int index = r.Next(4);
 
-            combat.physicalAttack(turnList.ElementAt(turnCounter), dreamTeam.ElementAt(index));
-            if (turnCounter == turnList.Count - 1)
-                turnCounter = 0;
+            for (int i = 0; i < enemies.Count; i++) {
+                int index = r.Next(4);
+                //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
+                combat.physicalAttack(turnList.ElementAt(turnCounter), dreamTeam.ElementAt(index));
+                turnCounter++;
+            }
+
+            turnCounter = 0;
         }
 
         private void Magic_Click(object sender, RoutedEventArgs e)
@@ -106,20 +110,21 @@ namespace TestUserControls.UserControls
         {
             for (int i = 0; i < enemies.Count; i++) {
                 if (enemies.ElementAt(i).Background == Brushes.LightPink) {
-                    MessageBox.Show($"{turnList.ElementAt(turnCounter)}");
+                    //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
                     combat.physicalAttack(turnList.ElementAt(turnCounter), enemies.ElementAt(i));
+                    turnCounter++;
                 }
             }
-            turnCounter++;
+
             if (turnCounter > 3)
                 EnemyAttack();
         }
 
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"{turnList.ElementAt(turnCounter)}");
-
+            //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
             turnCounter++;
+
             if (turnCounter > 3)
                 EnemyAttack();
         }
@@ -128,7 +133,6 @@ namespace TestUserControls.UserControls
         {
             this.Visibility = Visibility.Collapsed;
         }
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             ViewMagicGrid.Visibility = Visibility.Hidden;
@@ -150,34 +154,89 @@ namespace TestUserControls.UserControls
         private void MonsterMiniStat(List<Characters> enemies)
         {
             for (int i = 0; i < enemies.Count; i++) {
+                StackPanel sp = new StackPanel();
+                sp.Width = 183.25;
+                sp.Height = 61.25;
+
                 Label l = new Label();
-                l.Content = $"{enemies.ElementAt(i).characterName} \nHp: {enemies.ElementAt(i).Health} Mp: {enemies.ElementAt(i).Mana}";
-                l.Width = 183.25;
-                l.Height = 61.25;
+                l.FontWeight = FontWeights.DemiBold;
+                l.Content = $"{enemies.ElementAt(i).characterName}";
                 l.HorizontalContentAlignment = HorizontalAlignment.Center;
                 l.VerticalContentAlignment = VerticalAlignment.Center;
-                l.BorderBrush = Brushes.Black;
-                l.BorderThickness = new Thickness(1);
-                MonStats.Children.Add(l);
+
+                DockPanel dp = new DockPanel();
+                dp.HorizontalAlignment = HorizontalAlignment.Center;
+                TextBlock health = new TextBlock();
+                health.Text = "HP: ";
+                Binding bindH = new Binding("Health");
+                bindH.Mode = BindingMode.TwoWay;
+                TextBlock tb1 = new TextBlock();
+                tb1.DataContext = enemies.ElementAt(i);
+                tb1.SetBinding(TextBlock.TextProperty, bindH);
+                dp.Children.Add(health);
+                dp.Children.Add(tb1);
+
+                DockPanel dp2 = new DockPanel();
+                dp2.HorizontalAlignment = HorizontalAlignment.Center;
+                TextBlock mana = new TextBlock();
+                mana.Text = "MP: ";
+                Binding bindM = new Binding("Mana");
+                bindM.Mode = BindingMode.TwoWay;
+                TextBlock tb2 = new TextBlock();
+                tb2.DataContext = enemies.ElementAt(i);
+                tb2.SetBinding(TextBlock.TextProperty, bindM);
+                dp2.Children.Add(mana);
+                dp2.Children.Add(tb2);
+
+                sp.Children.Add(l);
+                sp.Children.Add(dp);
+                sp.Children.Add(dp2);
+                MonStats.Children.Add(sp);
             }
         }
         private void CharMiniStat()
         {
-
             for (int i = 0; i < 4; i++) {
-                Label l = new Label();
-                Binding bind = new Binding("Health");
-                bind.Mode = BindingMode.OneWay;
-                l.DataContext = dreamTeam.ElementAt(i);
+                StackPanel sp = new StackPanel();
+                sp.Width = 206;
+                sp.Height = 92;
 
-                l.Content = $"{dreamTeam.ElementAt(i).characterName} \nHp: {dreamTeam.ElementAt(i).Health} Mp: {dreamTeam.ElementAt(i).Mana}";
+                Label l = new Label();
                 l.Width = 206;
-                l.Height = 92;
-                l.BorderBrush = Brushes.Black;
+                l.Height = 46;
+                l.FontWeight = FontWeights.DemiBold;
+                l.Content = $"{dreamTeam.ElementAt(i).characterName}";
                 l.HorizontalContentAlignment = HorizontalAlignment.Center;
                 l.VerticalContentAlignment = VerticalAlignment.Center;
-                l.BorderThickness = new Thickness(1);
-                CharStats.Children.Add(l);
+
+                DockPanel dp = new DockPanel();
+                dp.HorizontalAlignment = HorizontalAlignment.Center;
+                TextBlock health = new TextBlock();
+                health.Text = "HP: ";
+                Binding bindH = new Binding("Health");
+                bindH.Mode = BindingMode.TwoWay;
+                TextBlock tb1 = new TextBlock();
+                tb1.DataContext = dreamTeam.ElementAt(i);
+                tb1.SetBinding(TextBlock.TextProperty, bindH);
+                dp.Children.Add(health);
+                dp.Children.Add(tb1);
+
+                DockPanel dp2 = new DockPanel();
+                dp2.HorizontalAlignment = HorizontalAlignment.Center;
+                TextBlock mana = new TextBlock();
+                mana.Text = "MP: ";
+                Binding bindM = new Binding("Mana");
+                bindM.Mode = BindingMode.TwoWay;
+                TextBlock tb2 = new TextBlock();
+                tb2.DataContext = dreamTeam.ElementAt(i);
+                tb2.SetBinding(TextBlock.TextProperty, bindM);
+                dp2.Children.Add(mana);
+                dp2.Children.Add(tb2);
+
+                sp.Children.Add(l);
+                sp.Children.Add(dp);
+                sp.Children.Add(dp2);
+                CharStats.Children.Add(sp);
             }
         }
         private void HeroGrid()
