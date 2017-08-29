@@ -36,7 +36,7 @@ namespace TestUserControls.UserControls
             CreditsLabel.Visibility = Visibility.Visible;
             CreditInformationLabel.Content = 
                 "This game was done in the PRO100-SB2 \n" +
-                "Creaters of this game those listed below: \n " +
+                "Creaters of this game those listed below: \n" +
                 "   Gaberiel Barber \n" +
                 "   Benjamin Beckwith \n" +
                 "   Michael Brannen \n" +
@@ -49,7 +49,7 @@ namespace TestUserControls.UserControls
         {
             CreditsLabel.Visibility = Visibility.Collapsed;
             HelpLabel.Visibility = Visibility.Visible;
-            HelpInformationLabel.Content = " To move: use WASD \n" +
+            HelpInformationLabel.Content = "To move: use WASD \n" +
                 "Combat: ";
         }
         
