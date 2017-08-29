@@ -110,7 +110,7 @@ namespace Requital
             SolidColorBrush sb = new SolidColorBrush();
             sb.Color = Color.FromArgb(120, 124, 124, 0);
             //t.Fill = sb;
-            CaveMap.Children.Add(t);
+            DesertMap.Children.Add(t);
             Canvas.SetTop(t, y);
             Canvas.SetLeft(t, x);
         }
