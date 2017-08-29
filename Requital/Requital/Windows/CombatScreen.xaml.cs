@@ -123,6 +123,7 @@ namespace TestUserControls.UserControls
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
+            combat.defend(turnList.ElementAt(turnCounter));
             turnCounter++;
 
             if (turnCounter > 3)
