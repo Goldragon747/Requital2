@@ -298,7 +298,12 @@ namespace TestUserControls.UserControls
             Grid.SetRowSpan(cs, 2);
             Grid.SetColumnSpan(cs, 3);
             Options.Children.Add(cs);
-
+            Button b = new Button();
+            b.Content = "save";
+            b.Height = 24;
+            b.Width = 28;
+            b.Click += Save;
+            Options.Children.Add(b);
             if (pauseCounter == 1)
                 cs.Visibility = Visibility.Visible;
 
@@ -307,6 +312,10 @@ namespace TestUserControls.UserControls
                 cs.Visibility = Visibility.Hidden;
                 pauseCounter = 0;
             }
+        }
+        private void Save(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
