@@ -40,7 +40,7 @@ namespace Requital
         {
             
         }
-        public int attackSpells(Characters attacker, Characters defender)
+        public void attackSpells(Characters attacker, Characters defender)
         {
             FireBall f = new FireBall();
             if (attacker.Mana >= f.ManaCost)
@@ -57,17 +57,12 @@ namespace Requital
                 {
                     finalDamage = 0;
                 }
-
+                defender.Health -= finalDamage;
                 if (defender.Health == 0 || defender.Health <= 0)
                 {
                     defender.Health = 0;
                     kill(attacker, defender);
                 }
-                return finalDamage;
-            }
-            else
-            {
-                return 0;
             }
         }
         public void healSpells(Characters healer, Characters afflicted)

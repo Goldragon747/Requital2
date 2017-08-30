@@ -51,7 +51,6 @@ namespace TestUserControls.UserControls
         }
         private CharacterStats cs;
         public SolidColorBrush brush1 = new SolidColorBrush();
-        List<Characters> turnList = new List<Characters>();
         Combat combat = new Combat();
 
         public CombatScreen()
@@ -73,9 +72,6 @@ namespace TestUserControls.UserControls
             MagicB_Description(fb.Name, fb.ManaCost);
             MagicB_Description(r.Name, r.ManaCost);
             MagicB_Description("Thundaga", 10);
-
-            for (int i = 0; i < 4; i++) turnList.Add(dreamTeam.ElementAt(i)); 
-            for (int i = 0; i < enemies.Count; i++) turnList.Add(enemies.ElementAt(i));
         }
 
         int turnCounter = 0;
@@ -86,9 +82,7 @@ namespace TestUserControls.UserControls
 
             for (int i = 0; i < enemies.Count; i++) {
                 int index = r.Next(4);
-                //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
-                combat.physicalAttack(turnList.ElementAt(turnCounter), dreamTeam.ElementAt(index));
-                turnCounter++;
+                combat.physicalAttack(enemies.ElementAt(i), dreamTeam.ElementAt(index));
             }
 
             turnCounter = 0;
@@ -110,8 +104,7 @@ namespace TestUserControls.UserControls
         {
             for (int i = 0; i < enemies.Count; i++) {
                 if (enemies.ElementAt(i).Background == Brushes.LightPink) {
-                    //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
-                    combat.physicalAttack(turnList.ElementAt(turnCounter), enemies.ElementAt(i));
+                    combat.physicalAttack(dreamTeam.ElementAt(turnCounter), enemies.ElementAt(i));
                     turnCounter++;
                 }
             }
@@ -122,8 +115,7 @@ namespace TestUserControls.UserControls
 
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show($"{turnList.ElementAt(turnCounter)} {turnCounter}");
-            combat.defend(turnList.ElementAt(turnCounter));
+            combat.defend(dreamTeam.ElementAt(turnCounter));
             turnCounter++;
 
             if (turnCounter > 3)

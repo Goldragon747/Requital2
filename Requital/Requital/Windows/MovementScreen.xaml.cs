@@ -56,14 +56,6 @@ namespace Requital.Windows
             get { return _image; }
             set { _image = value; }
         }
-        public Label DebugLabel {
-            get {
-                return Debug;
-            }
-            set {
-                Debug = value;
-            }
-        }
 
         public MovementScreen()
         {

@@ -114,7 +114,6 @@ namespace Requital
                     double topBound = -(Canvas.GetTop(t));
                     double bottomBound = -(Canvas.GetTop(t) + t.Height);
                     counter++;
-                    Cave.Debug.Content = $"{counter} : x1 {x1} : y1 {y1} : { triggered } left {leftBound} : right {rightBound} : bottom {bottomBound} : top {topBound} ";
                     if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
                         (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
                         (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
@@ -132,7 +131,7 @@ namespace Requital
             if ((ran.Next(120) == 55 && counter> 60000) || counter > 150000)
             {
                 counter = 0;
-                TriggerCombat();
+                //TriggerCombat();
             }
         }
         public async void TriggerCombat()

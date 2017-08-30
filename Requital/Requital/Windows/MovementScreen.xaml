@@ -26,12 +26,6 @@
                    Canvas.Top="200"
                    Canvas.Left="550"
                    Visibility="Hidden"/>
-
-            <Label x:Name="Debug"
-                   Width="400"
-                   Height="30"
-                   Margin="5"
-                   Background="MediumVioletRed"/>
         </Canvas>
     </Grid>
 </UserControl>

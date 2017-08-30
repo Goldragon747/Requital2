@@ -22,7 +22,7 @@ namespace Requital
         private double x = 0;
         private double y = 0;
 
-        private int speed = 1;
+        private int speed = 6;
 
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
