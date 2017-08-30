@@ -1,5 +1,6 @@
 ﻿using Requital;
 using Requital.Spells;
+using Requital.ValueConverters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,7 @@ using TestUserControls.UserControls;
 
 namespace TestUserControls.UserControls
 {
-    /// <summary>
-    /// Interaction logic for CombatScreen.xaml
-    /// </summary>
+    
     public partial class CombatScreen : UserControl
     {
         public List<Characters> dreamTeam { get; set; }
@@ -51,6 +50,7 @@ namespace TestUserControls.UserControls
         }
         private CharacterStats cs;
         public SolidColorBrush brush1 = new SolidColorBrush();
+        private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
         Combat combat = new Combat();
 
         public CombatScreen()
@@ -79,7 +79,7 @@ namespace TestUserControls.UserControls
         private void EnemyAttack()
         {
             Random r = new Random();
-
+            MessageBox.Show($"Enemy's Turn");
             for (int i = 0; i < enemies.Count; i++) {
                 int index = r.Next(4);
                 combat.physicalAttack(enemies.ElementAt(i), dreamTeam.ElementAt(index));
@@ -142,8 +142,46 @@ namespace TestUserControls.UserControls
             b.FontStyle = FontStyles.Italic;
             b.BorderBrush = Brushes.CornflowerBlue;
             b.BorderThickness = new Thickness(1);
+            b.Click += UseMagic;
             ViewMagic.Children.Add(b);
         }
+
+        private void UseMagic(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            ViewMagicGrid.Visibility = Visibility.Hidden;
+            if(b.Name == "Heal")
+            {
+                for (int i = 0; i < dreamTeam.Count; i++) {
+                    if (dreamTeam.ElementAt(i).Background == Brushes.LightBlue) {
+                        combat.healSpells(dreamTeam.ElementAt(turnCounter), dreamTeam.ElementAt(i));
+                        turnCounter++;
+                    }
+                }
+            }
+            if(b.Name == "Revive")
+            {
+                for (int i = 0; i < dreamTeam.Count; i++) {
+                    if (dreamTeam.ElementAt(i).Background == Brushes.LightBlue) {
+                        combat.revive(dreamTeam.ElementAt(turnCounter), dreamTeam.ElementAt(i));
+                        turnCounter++;
+                    }
+                }
+            }
+            if(b.Name == "Fireball")
+            {
+                for (int i = 0; i < enemies.Count; i++) {
+                    if (enemies.ElementAt(i).Background == Brushes.LightPink) {
+                        combat.attackSpells(dreamTeam.ElementAt(turnCounter), enemies.ElementAt(i));
+                        turnCounter++;
+                    }
+                }
+            }
+
+            if (turnCounter > 3)
+                EnemyAttack();
+        }
+
         private void MonsterMiniStat(List<Characters> enemies)
         {
             for (int i = 0; i < enemies.Count; i++) {
@@ -236,15 +274,17 @@ namespace TestUserControls.UserControls
         {
             for (int i = 0; i < dreamTeam.Count; i++)
             {
-                Button b = new Button();
-                Binding bind = new Binding("Health");
-                bind.Mode = BindingMode.TwoWay;
+                Image b = new Image();
+                Binding bind = new Binding("CharacterClass");
+                bind.Mode = BindingMode.OneWay;
+                bind.Converter = c2iConverter;
                 b.DataContext = dreamTeam.ElementAt(i);
-                b.SetBinding(ContentProperty, bind);
+                b.SetBinding(Image.SourceProperty, bind);
+                b.FlowDirection = FlowDirection.RightToLeft;
+                b.MouseLeftButtonDown += SelectedHero;
 
-                b.Width = 50;
-                b.Height = 75;
-                b.Background = Brushes.Aqua;
+                b.Width = 100;
+                b.Height = 100;
 
                 CharacterGrid.Children.Add(b);
             }
@@ -267,6 +307,19 @@ namespace TestUserControls.UserControls
             }
         }
 
+        private void SelectedHero(object sender, MouseButtonEventArgs e)
+        {
+            Image en = (Image)sender;
+            Characters hero = (Characters)en.DataContext;
+
+            for (int i = 0; i < dreamTeam.Count; i++)
+            {
+                if (hero == dreamTeam.ElementAt(i))
+                    hero.Background = Brushes.LightBlue;
+                else
+                    dreamTeam.ElementAt(i).Background = Brushes.Black;
+            }
+        }
         private void SelectedEnemy(object sender, RoutedEventArgs e)
         {
             Button en = (Button)sender;

@@ -82,6 +82,7 @@
     <Compile Include="Spells\Heal.cs" />
     <Compile Include="Spells\Spells.cs" />
     <Compile Include="ValueConverters\ClassToImagesConverter.cs" />
+    <Compile Include="ValueConverters\EnemyToImageConverter.cs" />
     <Compile Include="Windows\CharacterStats.xaml.cs">
       <DependentUpon>CharacterStats.xaml</DependentUpon>
     </Compile>
