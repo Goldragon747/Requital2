@@ -21,7 +21,8 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="Start" Margin="25" Click="Start_Click"/>
-            <Button Content="Help" Margin="25" Click="Help_Click"/>
+                <Button Content="Load" Margin="25" Click="Load_Click" />
+                <Button Content="Help" Margin="25" Click="Help_Click"/>
             <Button Content="Credits" Margin="25" Click="Credits_Click"/>
         </StackPanel>
         <StackPanel x:Name="HelpLabel" Visibility="Hidden" Background="CadetBlue">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,8 @@ namespace TestUserControls.UserControls
             CreditsLabel.Visibility = Visibility.Collapsed;
             HelpLabel.Visibility = Visibility.Visible;
             HelpInformationLabel.Content = "To move: use WASD \n" +
-                "Combat: ";
+                "Combat: click on enemy then click on what action you want to do \n" +
+                "Saving: Done automatically";
         }
         
         private void Start_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,18 @@ namespace TestUserControls.UserControls
         {
             HelpLabel.Visibility = Visibility.Hidden;
             CreditsLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog testOpen = new OpenFileDialog();
+            testOpen.Filter = "rqt files (*.rqt)|*.rqt|All files (*.*)|*.*";
+            testOpen.RestoreDirectory = true;
+            if (testOpen.ShowDialog() == true)
+            {
+                
+            }
+            
         }
     }
 }
