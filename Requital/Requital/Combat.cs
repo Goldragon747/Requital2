@@ -96,15 +96,13 @@ namespace Requital
         {
             defender.HasDefended = true;
         }
-        public void flee(Characters chicken)
+        public bool flee(Characters chicken)
         {
             Random r = new Random();
             int fleeDifficulty = r.Next(1, 125);
-            if(chicken.Speed >= fleeDifficulty)
-            {
-                //TODO get them out of the combat screen
-                //Run flee animation
-            }
+            if (chicken.Speed >= fleeDifficulty)
+                return true;
+            return false;
         }
         public void kill(Characters attacker, Characters defender)
         {

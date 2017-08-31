@@ -83,6 +83,7 @@ namespace TestUserControls.UserControls
 
                     TeamGrid.Children.Add(wp);
                     tempImg.Add(i);
+                    Username.Text = "";
                     createCounter++;
                 }
             }

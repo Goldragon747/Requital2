@@ -78,7 +78,7 @@ namespace TestUserControls.UserControls
                 i.MouseLeftButtonDown += ShowStats;
 
                 l.Margin = margin;
-                l.Content = charList.ElementAt(x).CharacterClass;
+                l.Content = charList.ElementAt(x).characterName;
                 l.HorizontalContentAlignment = HorizontalAlignment.Center;
                 l.VerticalContentAlignment = VerticalAlignment.Center;
 

@@ -1,5 +1,6 @@
 ﻿using Requital;
 using Requital.Spells;
+using Requital.ValueConverters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,44 +19,24 @@ using TestUserControls.UserControls;
 
 namespace TestUserControls.UserControls
 {
-    /// <summary>
-    /// Interaction logic for CombatScreen.xaml
-    /// </summary>
+    
     public partial class CombatScreen : UserControl
     {
         public List<Characters> dreamTeam { get; set; }
-        //public List<Characters> CombatTeam { get { return dreamTeam; }
-        //    set {
-        //        for (int i = 0; i < 4; i++) {
-        //            if(value.ElementAt(i).CharacterClass == "Cleric") {
-        //                dreamTeam.Add(new Cleric(value.ElementAt(i).characterName));
-        //            }
-        //            if (value.ElementAt(i).CharacterClass == "Mage") {
-        //                dreamTeam.Add(new Mage(value.ElementAt(i).characterName));
-        //            }
-        //            if (value.ElementAt(i).CharacterClass == "Rogue")
-        //            {
-        //                dreamTeam.Add(new Rogue(value.ElementAt(i).characterName));
-        //            }
-        //            if (value.ElementAt(i).CharacterClass == "Warrior")
-        //            {
-        //                dreamTeam.Add(new Warrior(value.ElementAt(i).characterName));
-        //            }
-        //        }
-        //    }
-        //}
         private List<Characters> enemies = new List<Characters>();
 
-        public List<Characters> Enemies { get { return enemies; }
-            set { enemies = value; }
-        }
+        public List<Characters> Enemies { get { return enemies; } set { enemies = value; } }
         private CharacterStats cs;
         public SolidColorBrush brush1 = new SolidColorBrush();
+        private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
         Combat combat = new Combat();
+        public Assets assets = new Assets();
 
         public CombatScreen()
         {
             InitializeComponent();
+            assets.LoadImages();
+            CombatImage.Source = assets.cave_battle;
         }
 
         public void StartControl()
@@ -64,7 +45,15 @@ namespace TestUserControls.UserControls
             CharMiniStat();
             EnemyGrid(Enemies);
             MonsterMiniStat(Enemies);
+
             cs = new CharacterStats(dreamTeam);
+            cs.Visibility = Visibility.Hidden;
+            Grid.SetRow(cs, 0);
+            Grid.SetColumn(cs, 0);
+            Grid.SetRowSpan(cs, 2);
+            Grid.SetColumnSpan(cs, 3);
+            Options.Children.Add(cs);
+
             Heal heal = new Heal();
             FireBall fb = new FireBall();
             Revive r = new Revive();
@@ -74,20 +63,25 @@ namespace TestUserControls.UserControls
             MagicB_Description("Thundaga", 10);
         }
 
-        int turnCounter = 0;
 
+        int turnCounter = 0;
         private void EnemyAttack()
         {
             Random r = new Random();
 
             for (int i = 0; i < enemies.Count; i++) {
                 int index = r.Next(4);
+                MessageBox.Show($"{enemies.ElementAt(i).characterName} attacks {dreamTeam.ElementAt(index).characterName}!");
                 combat.physicalAttack(enemies.ElementAt(i), dreamTeam.ElementAt(index));
             }
-
+            for (int i = 0; i < dreamTeam.Count; i++) {
+                if (dreamTeam.ElementAt(i).Health == 0) {
+                    MessageBox.Show($"{dreamTeam.ElementAt(i).characterName} died!");
+                    //dreamTeam.RemoveAt(i);
+                }
+            }
             turnCounter = 0;
         }
-
         private void Magic_Click(object sender, RoutedEventArgs e)
         {
             ViewMagicGrid.Width = ActualWidth;
@@ -104,17 +98,29 @@ namespace TestUserControls.UserControls
         {
             for (int i = 0; i < enemies.Count; i++) {
                 if (enemies.ElementAt(i).Background == Brushes.LightPink) {
+                    MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} attacked {enemies.ElementAt(i).characterName}!");
                     combat.physicalAttack(dreamTeam.ElementAt(turnCounter), enemies.ElementAt(i));
                     turnCounter++;
                 }
             }
-
+            
+            for (int i = 0; i < enemies.Count; i++) {
+                if (enemies.ElementAt(i).Health == 0) {
+                    enemies.RemoveAt(i);
+                    MonsterGrid.Children.RemoveAt(i);
+                    MonStats.Children.RemoveAt(i);
+                    if (enemies.Count == 0) { 
+                        MessageBox.Show("Enemy team has been defeated!");
+                        this.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
             if (turnCounter > 3)
                 EnemyAttack();
         }
-
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} defended!");
             combat.defend(dreamTeam.ElementAt(turnCounter));
             turnCounter++;
 
@@ -124,7 +130,12 @@ namespace TestUserControls.UserControls
 
         private void Flee_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            if(combat.flee(dreamTeam.ElementAt(turnCounter)) == true)
+                this.Visibility = Visibility.Collapsed;
+            turnCounter++;
+
+            if (turnCounter > 3)
+                EnemyAttack();
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -142,8 +153,63 @@ namespace TestUserControls.UserControls
             b.FontStyle = FontStyles.Italic;
             b.BorderBrush = Brushes.CornflowerBlue;
             b.BorderThickness = new Thickness(1);
+            b.Click += UseMagic;
             ViewMagic.Children.Add(b);
         }
+
+        private void UseMagic(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            ViewMagicGrid.Visibility = Visibility.Hidden;
+            if(b.Name == "Heal")
+            {
+                for (int i = 0; i < dreamTeam.Count; i++) {
+                    if (dreamTeam.ElementAt(i).Background == Brushes.LightBlue) {
+                        MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} heals {dreamTeam.ElementAt(i).characterName}!");
+                        combat.healSpells(dreamTeam.ElementAt(turnCounter), dreamTeam.ElementAt(i));
+                        dreamTeam.ElementAt(i).Background = Brushes.Black;
+                        turnCounter++;
+                    }
+                }
+            }
+            if(b.Name == "Revive")
+            {
+                for (int i = 0; i < dreamTeam.Count; i++) {
+                    if (dreamTeam.ElementAt(i).Background == Brushes.LightBlue) {
+                        MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} revived {dreamTeam.ElementAt(i).characterName}!");
+                        combat.revive(dreamTeam.ElementAt(turnCounter), dreamTeam.ElementAt(i));
+                        dreamTeam.ElementAt(i).Background = Brushes.Black;
+                        turnCounter++;
+                    }
+                }
+            }
+            if(b.Name == "Fireball")
+            {
+                for (int i = 0; i < enemies.Count; i++) {
+                    if (enemies.ElementAt(i).Background == Brushes.LightPink) {
+                        MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} fireballed {enemies.ElementAt(i).characterName}!");
+                        combat.attackSpells(dreamTeam.ElementAt(turnCounter), enemies.ElementAt(i));
+                        dreamTeam.ElementAt(i).Background = Brushes.Black;
+                        turnCounter++;
+                    }
+                }
+            }
+            for (int i = 0; i < enemies.Count; i++) {
+                if (enemies.ElementAt(i).Health == 0) {
+                    enemies.RemoveAt(i);
+                    MonsterGrid.Children.RemoveAt(i);
+                    MonStats.Children.RemoveAt(i);
+                    if (enemies.Count == 0) {
+                        MessageBox.Show("Enemy team has been defeated!");
+                        this.Visibility = Visibility.Collapsed;
+                    }
+
+                }
+            }
+            if (turnCounter > 3)
+                EnemyAttack();
+        }
+
         private void MonsterMiniStat(List<Characters> enemies)
         {
             for (int i = 0; i < enemies.Count; i++) {
@@ -236,15 +302,17 @@ namespace TestUserControls.UserControls
         {
             for (int i = 0; i < dreamTeam.Count; i++)
             {
-                Button b = new Button();
-                Binding bind = new Binding("Health");
-                bind.Mode = BindingMode.TwoWay;
+                Image b = new Image();
+                Binding bind = new Binding("CharacterClass");
+                bind.Mode = BindingMode.OneWay;
+                bind.Converter = c2iConverter;
                 b.DataContext = dreamTeam.ElementAt(i);
-                b.SetBinding(ContentProperty, bind);
+                b.SetBinding(Image.SourceProperty, bind);
+                b.FlowDirection = FlowDirection.RightToLeft;
+                b.MouseLeftButtonDown += SelectedHero;
 
-                b.Width = 50;
-                b.Height = 75;
-                b.Background = Brushes.Aqua;
+                b.Width = 100;
+                b.Height = 100;
 
                 CharacterGrid.Children.Add(b);
             }
@@ -267,6 +335,19 @@ namespace TestUserControls.UserControls
             }
         }
 
+        private void SelectedHero(object sender, MouseButtonEventArgs e)
+        {
+            Image en = (Image)sender;
+            Characters hero = (Characters)en.DataContext;
+
+            for (int i = 0; i < dreamTeam.Count; i++)
+            {
+                if (hero == dreamTeam.ElementAt(i))
+                    hero.Background = Brushes.LightBlue;
+                else
+                    dreamTeam.ElementAt(i).Background = Brushes.Black;
+            }
+        }
         private void SelectedEnemy(object sender, RoutedEventArgs e)
         {
             Button en = (Button)sender;
@@ -284,13 +365,12 @@ namespace TestUserControls.UserControls
         private void Pause_Command(object sender, ExecutedRoutedEventArgs e)
         {
             pauseCounter++;
-;
-            Grid.SetRow(cs, 0);
-            Grid.SetColumn(cs, 0);
-            Grid.SetRowSpan(cs, 2);
-            Grid.SetColumnSpan(cs, 3);
-            Options.Children.Add(cs);
-
+            //Button b = new Button();
+            //b.Content = "save";
+            //b.Height = 24;
+            //b.Width = 28;
+            //b.Click += Save;
+            //Options.Children.Add(b);
             if (pauseCounter == 1)
                 cs.Visibility = Visibility.Visible;
 
@@ -299,6 +379,10 @@ namespace TestUserControls.UserControls
                 cs.Visibility = Visibility.Hidden;
                 pauseCounter = 0;
             }
+        }
+        private void Save(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

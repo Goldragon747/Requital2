@@ -22,7 +22,7 @@ namespace Requital
             Speed = 45;
             MagicDefense = 3;
             PhysicalDefense = 1;
-            Mana = 10;
+            Mana = 100;
             string[] spells = { "Fireball" };
             Spells = spells;
             HasDefended = false;
@@ -42,7 +42,7 @@ namespace Requital
             Speed = 45;
             MagicDefense = 3;
             PhysicalDefense = 1;
-            Mana = 10;
+            Mana = 100;
             string[] spells = {"Fireball"};
             Spells = spells;
             HasDefended = false;

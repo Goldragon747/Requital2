@@ -17,6 +17,6 @@
         <ms:MovementScreen x:Name="Desert" Visibility="Visible"/>
         <uc:CombatScreen
             x:Name="CS"
-            Visibility="Hidden"/>
+            Visibility="Hidden" IsVisibleChanged="CS_IsVisibleChanged"/>
     </Grid>
 </Window>
