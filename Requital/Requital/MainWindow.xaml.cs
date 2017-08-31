@@ -102,27 +102,55 @@ namespace Requital
         public bool HitDetection()
         {
             bool returnBool = false;
-            foreach (UIElement item in Cave.Map.Children)
+            if (Cave.IsVisible)
             {
-                if (item is Rectangle)
+                foreach (UIElement item in Cave.Map.Children)
                 {
-                    Rectangle t = (Rectangle)item;
-                    double x1 = caveMovementLogic.X - 570;
-                    double y1 = caveMovementLogic.Y - 300;
-                    double leftBound = -(Canvas.GetLeft(t));
-                    double rightBound = -(Canvas.GetLeft(t) + t.Width);
-                    double topBound = -(Canvas.GetTop(t));
-                    double bottomBound = -(Canvas.GetTop(t) + t.Height);
-                    counter++;
-                    if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
-                        (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
-                        (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
-                        (x1 <= leftBound && x1 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound))
+                    if (item is Rectangle)
                     {
-                        returnBool = true;
-                    } 
+                        Rectangle t = (Rectangle)item;
+                        double x1 = caveMovementLogic.X - 570;
+                        double y1 = caveMovementLogic.Y - 300;
+                        double leftBound = -(Canvas.GetLeft(t));
+                        double rightBound = -(Canvas.GetLeft(t) + t.Width);
+                        double topBound = -(Canvas.GetTop(t));
+                        double bottomBound = -(Canvas.GetTop(t) + t.Height);
+                        counter++;
+                        if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                            (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                            (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
+                            (x1 <= leftBound && x1 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound))
+                        {
+                            returnBool = true;
+                        }
+                    }
                 }
             }
+            if (Desert.IsVisible)
+            {
+                foreach (UIElement item in Desert.Map.Children)
+                {
+                    if (item is Rectangle)
+                    {
+                        Rectangle t = (Rectangle)item;
+                        double x1 = desertMovementLogic.X - 570;
+                        double y1 = desertMovementLogic.Y - 300;
+                        double leftBound = -(Canvas.GetLeft(t));
+                        double rightBound = -(Canvas.GetLeft(t) + t.Width);
+                        double topBound = -(Canvas.GetTop(t));
+                        double bottomBound = -(Canvas.GetTop(t) + t.Height);
+                        counter++;
+                        if ((x1 <= leftBound && x1 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                            (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 >= bottomBound && y1 <= topBound) ||
+                            (x1 - 65 <= leftBound && x1 - 100 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound) ||
+                            (x1 <= leftBound && x1 >= rightBound) && (y1 - 100 >= bottomBound && y1 - 100 <= topBound))
+                        {
+                            returnBool = true;
+                        }
+                    }
+                }
+            }
+                
             return returnBool;
         }
         public void TryTriggerCombat()

@@ -89,6 +89,23 @@ namespace Requital
             CreateAndPlaceBoxCave(135, 135, 2970, 4165);
             CreateAndPlaceBoxCave(135, 605, 3020, 4245);
             CreateAndPlaceBoxCave(550, 135, 3020, 4745);
+
+            CreateAndPlaceBoxDesert(550, 360, 500, 0);
+            CreateAndPlaceBoxDesert(450, 480, 500, 0);
+            CreateAndPlaceBoxDesert(335, 860, 500, 0);
+            CreateAndPlaceBoxDesert(285, 360, 500, 500);
+            CreateAndPlaceBoxDesert(235, 460, 500, 490);
+            CreateAndPlaceBoxDesert(235, 320, 455, 890);
+            CreateAndPlaceBoxDesert(235, 320, 365, 980);
+            CreateAndPlaceBoxDesert(235, 320, 285, 1050);
+            CreateAndPlaceBoxDesert(235, 320, 235, 1350);
+            CreateAndPlaceBoxDesert(235, 320, 295, 1465);
+            CreateAndPlaceBoxDesert(235, 320, 365, 1535);
+            CreateAndPlaceBoxDesert(235, 320, 425, 1615);
+            CreateAndPlaceBoxDesert(235, 320, 450, 1640);
+            CreateAndPlaceBoxDesert(235, 320, 520, 1840);
+            CreateAndPlaceBoxDesert(235, 320, 560, 1890);
+            CreateAndPlaceBoxDesert(235, 320, 560, 1890);
         }
         public void CreateAndPlaceBoxCave(int width, int height,int x, int y)
         {
@@ -109,7 +126,7 @@ namespace Requital
             t.Height = height;
             SolidColorBrush sb = new SolidColorBrush();
             sb.Color = Color.FromArgb(120, 124, 124, 0);
-            //t.Fill = sb;
+            t.Fill = sb;
             DesertMap.Children.Add(t);
             Canvas.SetTop(t, y);
             Canvas.SetLeft(t, x);
