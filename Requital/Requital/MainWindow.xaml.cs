@@ -131,7 +131,7 @@ namespace Requital
             if ((ran.Next(120) == 55 && counter> 60000) || counter > 150000)
             {
                 counter = 0;
-                //TriggerCombat();
+                TriggerCombat();
             }
         }
         public async void TriggerCombat()
@@ -166,6 +166,12 @@ namespace Requital
         {
             if (Menu.Visibility == Visibility.Hidden)
                 CreateCharacters.Visibility = Visibility.Visible;
+        }
+
+        private void CS_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (CS.Visibility == Visibility.Collapsed)
+                Desert.Visibility = Visibility.Visible;
         }
     }
 }
