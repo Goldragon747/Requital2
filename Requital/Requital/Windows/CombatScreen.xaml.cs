@@ -41,6 +41,10 @@ namespace TestUserControls.UserControls
 
         public void StartControl()
         {
+            CharacterGrid.Children.Clear();
+            MonsterGrid.Children.Clear();
+            MonStats.Children.Clear();
+            CharStats.Children.Clear();
             HeroGrid();
             CharMiniStat();
             EnemyGrid(Enemies);

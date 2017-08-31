@@ -36,7 +36,7 @@ namespace Requital
             Menu.MenuSource = assets.title;
             encounter = new Encounters();
             caveMovementLogic = new Movement(this, -2750, -4300);
-            desertMovementLogic = new Movement(this, 0, 0);
+            desertMovementLogic = new Movement(this, -500, -500);
             BuildCanvas();
             HitBox hitboxes = new HitBox(Cave.Map,Desert.Map);
         }
@@ -156,7 +156,7 @@ namespace Requital
         public void TryTriggerCombat()
         {
             Random ran = new Random();
-            if ((ran.Next(120) == 55 && counter> 60000) || counter > 150000)
+            if ((ran.Next(120) == 55 && counter> 10000) || counter > 150000)
             {
                 counter = 0;
                 TriggerCombat();
@@ -175,7 +175,6 @@ namespace Requital
             //Cave.Visibility = Visibility.Hidden;
             Desert.Visibility = Visibility.Hidden;
             CS.Enemies = encounter.pickEncounter();
-            CS.dreamTeam = dreamTeam;
             CS.StartControl();
             CS.Visibility = Visibility.Visible;
         }
@@ -187,6 +186,8 @@ namespace Requital
                 //Cave.Visibility = Visibility.Visible;
                 Desert.Visibility = Visibility.Visible;
                 dreamTeam = CreateCharacters.DreamTeam;
+                CS.dreamTeam = dreamTeam;
+
             }
         }
 
@@ -199,7 +200,12 @@ namespace Requital
         private void CS_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (CS.Visibility == Visibility.Collapsed)
+            {
                 Desert.Visibility = Visibility.Visible;
+                Desert.ExclamVisibility = Visibility.Hidden;
+                desertMovementLogic.movementTimer.Start();
+                desertMovementLogic.disable = false;
+            }
         }
     }
 }
