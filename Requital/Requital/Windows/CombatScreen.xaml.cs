@@ -95,17 +95,30 @@ namespace TestUserControls.UserControls
         {
             for (int i = 0; i < enemies.Count; i++) {
                 if (enemies.ElementAt(i).Background == Brushes.LightPink) {
+                    MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} attacked {enemies.ElementAt(i).characterName}!");
                     combat.physicalAttack(dreamTeam.ElementAt(turnCounter), enemies.ElementAt(i));
                     turnCounter++;
                 }
             }
+            
+            for (int i = 0; i < enemies.Count; i++) {
+                if (enemies.ElementAt(i).Health == 0) {
+                    enemies.RemoveAt(i);
+                    MonsterGrid.Children.RemoveAt(i);
+                    MonStats.Children.RemoveAt(i);
+                    if (enemies.Count == 0) { 
+                        MessageBox.Show("Enemy team has been defeated!");
+                        this.Visibility = Visibility.Collapsed;
+                    }
 
+                }
+            }
             if (turnCounter > 3)
                 EnemyAttack();
         }
-
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} defended!");
             combat.defend(dreamTeam.ElementAt(turnCounter));
             turnCounter++;
 
@@ -152,6 +165,7 @@ namespace TestUserControls.UserControls
                     if (dreamTeam.ElementAt(i).Background == Brushes.LightBlue) {
                         MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} heals {dreamTeam.ElementAt(i).characterName}!");
                         combat.healSpells(dreamTeam.ElementAt(turnCounter), dreamTeam.ElementAt(i));
+                        dreamTeam.ElementAt(i).Background = Brushes.Black;
                         turnCounter++;
                     }
                 }
@@ -162,6 +176,7 @@ namespace TestUserControls.UserControls
                     if (dreamTeam.ElementAt(i).Background == Brushes.LightBlue) {
                         MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} revived {dreamTeam.ElementAt(i).characterName}!");
                         combat.revive(dreamTeam.ElementAt(turnCounter), dreamTeam.ElementAt(i));
+                        dreamTeam.ElementAt(i).Background = Brushes.Black;
                         turnCounter++;
                     }
                 }
@@ -172,11 +187,23 @@ namespace TestUserControls.UserControls
                     if (enemies.ElementAt(i).Background == Brushes.LightPink) {
                         MessageBox.Show($"{dreamTeam.ElementAt(turnCounter).characterName} fireballed {enemies.ElementAt(i).characterName}!");
                         combat.attackSpells(dreamTeam.ElementAt(turnCounter), enemies.ElementAt(i));
+                        dreamTeam.ElementAt(i).Background = Brushes.Black;
                         turnCounter++;
                     }
                 }
             }
+            for (int i = 0; i < enemies.Count; i++) {
+                if (enemies.ElementAt(i).Health == 0) {
+                    enemies.RemoveAt(i);
+                    MonsterGrid.Children.RemoveAt(i);
+                    MonStats.Children.RemoveAt(i);
+                    if (enemies.Count == 0) {
+                        MessageBox.Show("Enemy team has been defeated!");
+                        this.Visibility = Visibility.Collapsed;
+                    }
 
+                }
+            }
             if (turnCounter > 3)
                 EnemyAttack();
         }

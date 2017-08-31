@@ -21,8 +21,8 @@ namespace Requital
             SpellPower = 10;
             Speed = 40;
             MagicDefense = 3;
-            PhysicalDefense = 1;
-            Mana = 10;
+            PhysicalDefense = 5;
+            Mana = 200;
             string[] spells = { "Cure" };
             Spells = spells;
             HasDefended = false;
@@ -42,7 +42,7 @@ namespace Requital
             Speed = 40;
             MagicDefense = 3;
             PhysicalDefense = 1;
-            Mana = 10;
+            Mana = 200;
             string[] spells = {"Cure"};
             Spells = spells;
             HasDefended = false;
