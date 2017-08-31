@@ -25,9 +25,7 @@ namespace TestUserControls.UserControls
         public List<Characters> dreamTeam { get; set; }
         private List<Characters> enemies = new List<Characters>();
 
-        public List<Characters> Enemies { get { return enemies; }
-            set { enemies = value; }
-        }
+        public List<Characters> Enemies { get { return enemies; } set { enemies = value; } }
         private CharacterStats cs;
         public SolidColorBrush brush1 = new SolidColorBrush();
         private ClassToImagesConverter c2iConverter = new ClassToImagesConverter();
@@ -76,7 +74,12 @@ namespace TestUserControls.UserControls
                 MessageBox.Show($"{enemies.ElementAt(i).characterName} attacks {dreamTeam.ElementAt(index).characterName}!");
                 combat.physicalAttack(enemies.ElementAt(i), dreamTeam.ElementAt(index));
             }
-
+            for (int i = 0; i < dreamTeam.Count; i++) {
+                if (dreamTeam.ElementAt(i).Health == 0) {
+                    MessageBox.Show($"{dreamTeam.ElementAt(i).characterName} died!");
+                    //dreamTeam.RemoveAt(i);
+                }
+            }
             turnCounter = 0;
         }
         private void Magic_Click(object sender, RoutedEventArgs e)
@@ -110,7 +113,6 @@ namespace TestUserControls.UserControls
                         MessageBox.Show("Enemy team has been defeated!");
                         this.Visibility = Visibility.Collapsed;
                     }
-
                 }
             }
             if (turnCounter > 3)
