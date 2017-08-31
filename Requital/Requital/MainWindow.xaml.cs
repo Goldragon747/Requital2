@@ -36,6 +36,7 @@ namespace Requital
             Menu.MenuSource = assets.title;
             encounter = new Encounters();
             caveMovementLogic = new Movement(this, -2750, -4300);
+            
             desertMovementLogic = new Movement(this, -500, -500);
             BuildCanvas();
             HitBox hitboxes = new HitBox(Cave.Map,Desert.Map);
@@ -156,7 +157,7 @@ namespace Requital
         public void TryTriggerCombat()
         {
             Random ran = new Random();
-            if ((ran.Next(120) == 55 && counter> 10000) || counter > 150000)
+            if ((ran.Next(120) == 55 && counter> 30000) || counter > 150000)
             {
                 counter = 0;
                 TriggerCombat();
@@ -164,16 +165,16 @@ namespace Requital
         }
         public async void TriggerCombat()
         {
-            //Cave.ExclamVisibility = Visibility.Visible;
-            Desert.ExclamVisibility = Visibility.Visible;
-            desertMovementLogic.disable = true;
-            //caveMovementLogic.disable = true;
-            desertMovementLogic.isMoving = false;
-            desertMovementLogic.movementTimer.Stop();
-            desertMovementLogic.dispatcherTimer.Stop();
+            Cave.ExclamVisibility = Visibility.Visible;
+            //Desert.ExclamVisibility = Visibility.Visible;
+            //desertMovementLogic.disable = true;
+            caveMovementLogic.disable = true;
+            caveMovementLogic.isMoving = false;
+            caveMovementLogic.movementTimer.Stop();
+            caveMovementLogic.dispatcherTimer.Stop();
             await Task.Delay(1600);
-            //Cave.Visibility = Visibility.Hidden;
-            Desert.Visibility = Visibility.Hidden;
+            Cave.Visibility = Visibility.Hidden;
+            //Desert.Visibility = Visibility.Hidden;
             CS.Enemies = encounter.pickEncounter();
             CS.StartControl();
             CS.Visibility = Visibility.Visible;
@@ -183,8 +184,8 @@ namespace Requital
         {
             if(CreateCharacters.Visibility == Visibility.Collapsed)
             {
-                //Cave.Visibility = Visibility.Visible;
-                Desert.Visibility = Visibility.Visible;
+                Cave.Visibility = Visibility.Visible;
+                //Desert.Visibility = Visibility.Visible;
                 dreamTeam = CreateCharacters.DreamTeam;
                 CS.dreamTeam = dreamTeam;
 
@@ -201,10 +202,10 @@ namespace Requital
         {
             if (CS.Visibility == Visibility.Collapsed)
             {
-                Desert.Visibility = Visibility.Visible;
-                Desert.ExclamVisibility = Visibility.Hidden;
-                desertMovementLogic.movementTimer.Start();
-                desertMovementLogic.disable = false;
+                Cave.Visibility = Visibility.Visible;
+                Cave.ExclamVisibility = Visibility.Hidden;
+                caveMovementLogic.movementTimer.Start();
+                caveMovementLogic.disable = false;
             }
         }
     }
